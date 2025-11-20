@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Genshin Impact - Nefer</title>
+  <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+    }
+
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(135deg, #0e372e 10%, #1d5946 90%);
+      color: #d9e8c6;
+      height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: #c6e8a8;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: #a6d04d;
+      text-decoration: underline;
+    }
+
+    /* Container Grid */
+    .container {
+      display: grid;
+      grid-template-columns: 220px 1fr 360px;
+      grid-template-rows: 1fr auto;
+      height: 100vh;
+      gap: 15px;
+      padding: 15px;
+      background-image: url("https://images5.alphacoders.com/129/thumb-1920-1292433.jpg");
+    }
+
+    /* Sidebar Navigation */
+    nav {
+      background: rgba(16, 40, 30, 0.75);
+      border-radius: 15px;
+      padding: 40px 35px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      user-select: none;
+      position: relative;
+    }
+
+    nav h1 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Triangle Icon using CSS */
+    nav h1::before {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      border-bottom: 18px solid #a0ca86;
+      transform: rotate(-15deg);
+      display: inline-block;
+    }
+
+    nav ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    nav ul li {
+      margin: 20px 0;
+      font-weight: 700;
+      font-size: 1.15rem;
+      cursor: pointer;
+      letter-spacing: 0.03rem;
+      color: #b8dcb0;
+      transition: color 0.3s ease;
+      position: relative;
+      padding-left: 24px;
+    }
+
+    nav ul li.active,
+    nav ul li:hover {
+      color: #e6f4d6;
+      font-weight: 900;
+    }
+
+    /* Custom bullet for active or hover */
+    nav ul li.active::before,
+    nav ul li:hover::before {
+      content: '●';
+      position: absolute;
+      left: 0;
+      color: #93c76d;
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    /* Voice Button */
+    .voice-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: none;
+      background: #bce0c7;
+      filter: drop-shadow(0 0 5px #a3df9f);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 22px;
+      color: #0d3e37;
+      user-select: none;
+      transition: background 0.3s ease;
+    }
+
+    .voice-btn:hover {
+      background: #a3df9f;
+    }
+
+    /* "View More" Button */
+    .btn-view-more {
+      background: #86bb59;
+      border-radius: 30px;
+      border: none;
+      padding: 14px 40px;
+      color: #f0f9d2;
+      font-weight: 700;
+      font-size: 1.3rem;
+      cursor: pointer;
+      width: 180px;
+      filter: drop-shadow(0 0 10px #a2cc65);
+      transition: background 0.4s ease;
+      user-select: none;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .btn-view-more:hover {
+      background: #a0d041;
+    }
+
+    /* Character Description */
+    .char-desc {
+      font-size: 1.1rem;
+      letter-spacing: 0.04rem;
+      color: #cad6ba;
+      max-width: 360px;
+      line-height: 1.4;
+      font-weight: 400;
+    }
+
+    /* Main Content */
+    main {
+      background: linear-gradient(135deg, #155a45 40%, #0e3b2f 90%);
+      border-radius: 25px;
+      padding: 45px 50px 50px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      gap: 18px;
+      user-select: none;
+      position: relative;
+    }
+
+    /* New Label */
+    .new-label {
+      display: inline-block;
+      background: #93bf5b;
+      padding: 4px 20px;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 12px;
+      letter-spacing: 0.04rem;
+    }
+
+    /* Element Icon created with CSS heart + leaf */
+    .element-icon {
+      font-size: 3.5rem;
+      color: #a6dd8c;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 0 5px #80bb48);
+      user-select: none;
+      position: relative;
+      width: 40px;
+      height: 40px;
+      margin-top: 14px;
+    }
+
+    .element-icon::before {
+      content: "♣"; /* Clover symbol as a proxy for element icon */
+      font-weight: bold;
+      font-size: 3.5rem;
+      color: #a6dd8c;
+      filter: drop-shadow(0 0 5px #80bb48);
+    }
+
+    /* Character name */
+    .char-name {
+      font-family: 'Georgia', serif;
+      font-weight: 900;
+      font-size: 4rem;
+      line-height: 1;
+      letter-spacing: 0.05rem;
+      margin: 0;
+      user-select: none;
+    }
+
+    /* Stars rating */
+    .stars {
+      margin-bottom: 25px;
+      user-select: none;
+    }
+
+    .stars span {
+      font-size: 2.4rem;
+      color: gold;
+      margin-right: 3px;
+      text-shadow: 0 0 4px #b88f00;
+    }
+
+    /* Separator */
+    .separator {
+      width: 140px;
+      height: 2px;
+      background: linear-gradient(to right, transparent, #739c5b, transparent);
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .separator::after {
+      content: "◆";
+      font-size: 1.6rem;
+      color: #82b870;
+      position: absolute;
+      right: -25px;
+      top: -11px;
+      text-shadow: 0 0 6px #acc282aa;
+      user-select: none;
+    }
+
+    /* Character Image Block */
+    .char-image {
+      grid-column: 3;
+      grid-row: 1 / 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+      filter: drop-shadow(0 0 10px #8fc65a);
+    }
+
+    .char-image img {
+      max-width: 100%;
+      height: auto;
+      pointer-events: none;
+      border-radius: 12px;
+    }
+
+    /* Right side action buttons */
+    .right-icons {
+      position: absolute;
+      top: 160px;
+      right: 65px;
+      display: flex;
+      flex-direction: column;
+      gap: 35px;
+      user-select: none;
+      z-index: 2;
+    }
+
+    .right-icons button {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      border: 2.5px solid #d0efbc;
+      background-color: #143f31;
+      box-shadow: 0 0 8px #8bbb54;
+      cursor: pointer;
+      font-size: 30px;
+      color: #b8e2a7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .right-icons button:hover,
+    .right-icons button.active {
+      border-color: #a0d053;
+      box-shadow: 0 0 20px #a0d053;
+    }
+
+    /* Footer */
+    footer {
+      grid-column: 1 / 4;
+      grid-row: 2;
+      background: #193d1f;
+      border-top: 4px solid #6eae54;
+      padding: 14px 120px;
+      color: #bedda9;
+      font-family: 'Georgia', serif;
+      font-weight: 600;
+      font-size: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    footer .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      filter: drop-shadow(0 0 3px #8abb51);
+    }
+
+    /* Footer Genshin logo as text with style */
+    .footer-logo .logo {
+      font-weight: 900;
+      font-size: 1.5rem;
+      font-family: 'Arial Black', Arial, sans-serif;
+      color: #b3ddb4;
+      text-shadow: 0 0 5px #729a4a;
+      user-select: none;
+    }
+
+    /* Footer message */
+    footer .footer-message {
+      flex-grow: 1;
+      text-align: center;
+      font-weight: 400;
+      font-size: 1.1rem;
+      max-width: 600px;
+      color: #c6df9f;
+    }
+
+    /* Download Button */
+    .btn-download {
+      background: #569446;
+      border-radius: 30px;
+      border: none;
+      padding: 9px 32px;
+      color: #e4f3d1;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 0 15px #477d2f;
+      filter: drop-shadow(0 0 12px #74a44b);
+      transition: background 0.3s ease;
+      user-select: none;
+      line-height: 1.2;
+    }
+
+    .btn-download:hover {
+      background: #97c958;
+      box-shadow: 0 0 20px #9dd25e;
+      color: #26511d;
+    }
+
+    /* Responsive */
+    @media (max-width: 1145px) {
+      .container {
+        grid-template-columns: 200px 1fr;
+        grid-template-rows: 1fr auto;
+      }
+
+      .char-image,
+      .right-icons {
+        display: none;
+      }
+
+      footer {
+        padding: 14px 30px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <!-- Navigation Sidebar -->
+    <nav aria-label="Website navigation">
+      <h1>Characters · Weapons</h1>
+      <a href="index.html" class="active">.HOME</a>
+      <a href="startgame.html" class="active">.Character</a>
+      <a href="event_calender.html" class="active">.Event Calender</a>
+      <button class="voice-btn" aria-label="Voice">🎤</button>
+      <button class="btn-view-more" aria-label="View More about Nefer">View More</button>
+      <p class="char-desc">
+        The remarkably resourceful owner of the Curatorium of Secrets.
+      </p>
+    </nav>
+
+    <!-- Main Content -->
+    <main role="main" aria-label="Character details">
+      <div class="element-icon" aria-hidden="true"></div>
+      <div class="new-label">NEW</div>
+      <h2 class="char-name">Nefer</h2>
+      
+      <div class="stars" aria-label="5 star rating" role="img">
+        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+        <p>The remarkably resourceful owner of the Curatorium of Secrets.</p>
+        <img src="https://static.beebom.com/wp-content/uploads/2023/06/how-to-get-Characters-in-Genshin-Impact.png?w=750&quality=75" alt="">
+      </div>
+      <div class="separator"></div>
+    </main>
+
+    <!-- Right Side Character Image -->
+    
+
+    <!-- Right side action buttons -->
+    <div class="right-icons" aria-label="Character actions">
+      <button title="Profile" aria-pressed="false">👤</button>
+      <button title="Weapon" aria-pressed="true" class="active">⚔️</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-logo" aria-label="Genshin Impact logo">
+        <span class="logo">GENSHIN</span>
+        <span>Song of the Welkin Moon</span>
+      </div>
+      <div class="footer-message" role="note" aria-live="polite">
+        Take part in the Version "Luna II" event to obtain Primogems!
+      </div>
+      <button class="btn-download" aria-label="Download Genshin Impact for PC">
+        PC Download<br /><small>(HoYoPlay)</small>
+      </button>
+    </footer>
+  </div>
+</body>
+
+</html>
