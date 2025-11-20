@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Event Calendar - Version "Luna II"</title>
+<style>
+  /* Reset & Base */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to top, #3a2b5a 0%, #0b1034 80%);
+    color: #fff3ce;
+    line-height: 1.5;
+  }
+
+  /* Container */
+  .container {
+    max-width: 1180px;
+    margin: 2rem auto;
+    background: #f4e2a4;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  /* Header */
+  header {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #7b5527;
+    font-weight: 700;
+    font-size: 1.5rem;
+    font-family: 'Merriweather', serif;
+    letter-spacing: 0.04em;
+    position: relative;
+  }
+  header .icon {
+    font-size: 2rem;
+    margin-right: 0.25rem;
+    color: #d9a607;
+  }
+
+  /* Version Label */
+  .version-label {
+    text-align: center;
+    font-weight: 700;
+    color: #a27a3c;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-family: 'Georgia', serif;
+  }
+
+  /* Navigation (Sidebar) */
+  nav.sidebar {
+    position: fixed;
+    top: 50%;
+    left: 1rem;
+    background: transparent;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    font-weight: 600;
+  }
+  nav.sidebar a {
+    color: #fff3ce;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    cursor: pointer;
+  }
+  nav.sidebar a:hover,
+  nav.sidebar a.active {
+    color: #ffd95b;
+  }
+  nav.sidebar a .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fff3ce;
+  }
+  nav.sidebar a.active .dot {
+    background: #ffd95b;
+    box-shadow: 0 0 6px #ffd95b;
+  }
+
+  /* Calendar Table */
+  table.event-calendar {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fffbea88;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: inset 0 0 25px #e0c98e88;
+  }
+  thead tr {
+    background: #d0b867;
+  }
+  thead th {
+    font-weight: 700;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 2px solid #a48851;
+    color: #453305;
+    font-size: 1.1rem;
+  }
+  tbody td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid #e9dca3;
+    vertical-align: top;
+    color: #453305;
+    font-size: 0.9rem;
+  }
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* Event Items & Icons */
+  .event {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: #fdf6d8d9;
+    border-radius: 6px;
+    padding: 0.3rem 0.75rem;
+    margin: 0.25rem 0;
+    box-shadow: 1px 1px 6px #c2aa6a;
+    font-weight: 600;
+    color: #5a4822;
+  }
+  .event-img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    flex-shrink: 0;
+    border: 1px solid #ae8d39;
+  }
+  /* Icons placeholders (replace with images) */
+  .icon-primo {
+    width: 24px;
+    height: 24px;
+    background: url('https://static.wikia.nocookie.net/gensin-impact/images/6/6f/Icon_Primogem.png') no-repeat center/contain;
+  }
+  .btn-go {
+    background: #de9220;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 0 8px #b37a19;
+    transition: background 0.3s ease;
+  }
+  .btn-go:hover {
+    background: #c07a1a;
+  }
+  .label-up {
+    background: #d04a2a;
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0 6px;
+    border-radius: 3px;
+    margin-right: 0.35rem;
+  }
+  .web-event {
+    background: #739766;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-left: auto;
+  }
+
+  /* Dates row */
+  .dates-header {
+    background: #d6bc79cc;
+    color: #5a4822;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+  }
+
+  /* Footer bar */
+  footer {
+    background: #7f5f2f;
+    color: #fff2a0;
+    font-weight: 600;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 0 0 12px 12px;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+  }
+  .download-btn {
+    background: #c08e29;
+    border: none;
+    border-radius: 20px;
+    padding: 0.5rem 2rem;
+    font-weight: 700;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-left: 1rem;
+    box-shadow: 0 0 12px #b0831a;
+  }
+  .download-btn:hover {
+    background: #a46f14;
+  }
+
+  /* Responsive and Utility */
+  @media (max-width: 1024px) {
+    nav.sidebar {
+      position: static;
+      flex-direction: row;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1rem;
+    }
+    .container {
+      margin-top: 5rem;
+      padding: 1rem;
+    }
+  }
+  @media (max-width: 600px) {
+    table.event-calendar, thead, tbody, th, td, tr {
+      display: block;
+    }
+    thead tr {
+      display: none;
+    }
+    tbody td {
+      border: none;
+      padding: 1rem 0;
+      position: relative;
+      padding-left: 50%;
+      text-align: left;
+      background: #fffdfa99;
+      margin-bottom: 0.8rem;
+      border-radius: 10px;
+      color: #5a4822;
+    }
+    tbody td::before {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      width: 45%;
+      white-space: nowrap;
+      font-weight: 700;
+      content: attr(data-label);
+      color: #896f22;
+    }
+    .event {
+      flex-wrap: wrap;
+    }
+    .btn-go {
+      margin-top: 0.5rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Sidebar Navigation -->
+<nav class="sidebar" aria-label="Main Navigation">
+  <a href="index.html" class="active"><span class="dot"></span> Home</a>
+  <a href="startgame.html"><span class="dot"></span> Character</a>
+  
+  <a href="#"><span class="dot"></span> Event Calendar</a>
+</nav>
+
+<div class="container" role="main" aria-labelledby="calendarTitle">
+
+  <header id="calendarTitle" aria-label="Event Calendar Header">
+    <span class="icon">✨</span> Event Calendar
+  </header>
+
+  <div class="version-label" aria-live="polite">
+    Version "Luna II" Event Calendar
+  </div>
+
+  <table class="event-calendar" role="grid" aria-describedby="calendarDesc">
+    <caption id="calendarDesc" class="sr-only">
+      Event calendar displaying multiple version and permanent events for October and November.
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col" style="width:20%;">October</th>
+        <th scope="col" style="width:20%;">November</th>
+        <th scope="col" style="width:60%;">Event Details</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- Sample Rows -->
+      <tr>
+        <td data-label="October Date" aria-sort="ascending">10/10</td>
+        <td data-label="November Date"></td>
+        <td data-label="Event Details">
+          <div class="event">
+            <div class="event-img" style="background-image:url('https://static.wikia.nocookie.net/gensin-impact/images/1/11/Venti_Icon.png');" aria-hidden="true" title="Character Venti"></div>
+            <div>
+              <div><strong>Version "Luna II" Special Program</strong></div>
+              <div>"Temptation of the Crimson Sands" Begins</div>
+            </div>
+            <button class="btn-go" aria-label="Go to event details">GO</button>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td data-label="October Date">10/22</td>
+        <td data-label="November Date"></td>
+        <td data-label="Event Details">
+          <div class="event">
+            <span class="icon-primo" title="Primogem icon" aria-hidden="true"></span>
+            <div>Version "Luna II" update</div>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td data-label="October Date">10/10 - 10/21</td>
+        <td data-label="November Date"></td>
+        <td data-label="Event Details">
+          <div class="event">
+            <div class="event-img" style="background-image:url('https://static.wikia.nocookie.net/gensin-impact/images/4/45/Starbound_Oath_Icon.png');" title="Starbound Oath" aria-hidden="true"></div>
+            <span class="icon-primo" aria-hidden="true"></span> x40
+            <span class="web-event" aria-label="Web Event">Web Event</span>
+            Starbound Oath
+            <button class="btn-go" aria-label="Go to Starbound Oath details">GO</button>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td data-label="October Date">10/24 - 11/03</td>
+        <td data-label="November Date"></td>
+        <td data-label="Event Details">
+          <div class="event">
+            <span class="icon-primo" aria-hidden="true"></span> x420
+            Saurian Sojourn
+          </div>
+        </td>
+      </tr>
+
+      <!-- Continue listing events similarly -->
+
+      <tr>
+        <td data-label="October Date">09/10 - 12/01</td>
+        <td data-label="November Date"></td>
+        <td data-label="Event Details" style="background:#dae6afcc; font-weight: 700;">
+          To Temper Thyself and Journey Far
+          <button class="btn-go" aria-label="Go to event details">GO</button>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="3" style="background:#f4e2a422; font-style: italic; padding: 0.5rem 1rem; font-size: 0.8rem;">
+          *Please check in-game notices for event details and schedules.
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+</div>
+
+<footer>
+  <span>Genshin Impact &nbsp;|&nbsp; Song of the Welkin Moon</span>
+  <span>Take part in the Version "Luna II" event to obtain Primogems!</span>
+  <button class="download-btn" aria-label="Download PC version (HoYoPlay)">PC Download (HoYoPlay)</button>
+</footer>
+
+</body>
+</html>
