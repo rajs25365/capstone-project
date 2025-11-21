@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Event Calendar - Version "Luna II"</title>
 <style>
-  /* Reset & Base */
   *, *::before, *::after {
     box-sizing: border-box;
   }
@@ -17,7 +16,6 @@
     line-height: 1.5;
   }
 
-  /* Container */
   .container {
     max-width: 1180px;
     margin: 2rem auto;
@@ -28,7 +26,6 @@
     position: relative;
   }
 
-  /* Header */
   header {
     text-align: center;
     margin-bottom: 1rem;
@@ -45,7 +42,6 @@
     color: #d9a607;
   }
 
-  /* Version Label */
   .version-label {
     text-align: center;
     font-weight: 700;
@@ -55,7 +51,6 @@
     font-family: 'Georgia', serif;
   }
 
-  /* Navigation (Sidebar) */
   nav.sidebar {
     position: fixed;
     top: 50%;
@@ -92,7 +87,6 @@
     box-shadow: 0 0 6px #ffd95b;
   }
 
-  /* Calendar Table */
   table.event-calendar {
     width: 100%;
     border-collapse: collapse;
@@ -123,7 +117,6 @@
     border-bottom: none;
   }
 
-  /* Event Items & Icons */
   .event {
     display: flex;
     align-items: center;
@@ -145,7 +138,6 @@
     flex-shrink: 0;
     border: 1px solid #ae8d39;
   }
-  /* Icons placeholders (replace with images) */
   .icon-primo {
     width: 24px;
     height: 24px;
@@ -185,7 +177,6 @@
     margin-left: auto;
   }
 
-  /* Dates row */
   .dates-header {
     background: #d6bc79cc;
     color: #5a4822;
@@ -194,7 +185,6 @@
     padding: 0.5rem 1rem;
   }
 
-  /* Footer bar */
   footer {
     background: #7f5f2f;
     color: #fff2a0;
@@ -221,7 +211,6 @@
     background: #a46f14;
   }
 
-  /* Responsive and Utility */
   @media (max-width: 1024px) {
     nav.sidebar {
       position: static;
@@ -274,7 +263,6 @@
 </head>
 <body>
 
-<!-- Sidebar Navigation -->
 <nav class="sidebar" aria-label="Main Navigation">
   <a href="index.html" class="active"><span class="dot"></span> Home</a>
   <a href="startgame.html"><span class="dot"></span> Character</a>
@@ -305,7 +293,6 @@
     </thead>
     <tbody>
 
-      <!-- Sample Rows -->
       <tr>
         <td data-label="October Date" aria-sort="ascending">10/10</td>
         <td data-label="November Date"></td>
@@ -357,7 +344,6 @@
         </td>
       </tr>
 
-      <!-- Continue listing events similarly -->
 
       <tr>
         <td data-label="October Date">09/10 - 12/01</td>
