@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Genshin Impact - Nefer</title>
   <style>
-    /* Reset & base */
     * {
       box-sizing: border-box;
     }
@@ -33,7 +32,6 @@
       text-decoration: underline;
     }
 
-    /* Container Grid */
     .container {
       display: grid;
       grid-template-columns: 220px 1fr 360px;
@@ -44,7 +42,6 @@
       background-image: url("https://images5.alphacoders.com/129/thumb-1920-1292433.jpg");
     }
 
-    /* Sidebar Navigation */
     nav {
       background: rgba(16, 40, 30, 0.75);
       border-radius: 15px;
@@ -66,7 +63,6 @@
       gap: 8px;
     }
 
-    /* Triangle Icon using CSS */
     nav h1::before {
       content: '';
       width: 0;
@@ -102,7 +98,6 @@
       font-weight: 900;
     }
 
-    /* Custom bullet for active or hover */
     nav ul li.active::before,
     nav ul li:hover::before {
       content: '●';
@@ -113,7 +108,7 @@
       line-height: 1;
     }
 
-    /* Voice Button */
+    
     .voice-btn {
       width: 60px;
       height: 60px;
@@ -136,7 +131,7 @@
       background: #a3df9f;
     }
 
-    /* "View More" Button */
+    
     .btn-view-more {
       background: #86bb59;
       border-radius: 30px;
@@ -158,7 +153,7 @@
       background: #a0d041;
     }
 
-    /* Character Description */
+    
     .char-desc {
       font-size: 1.1rem;
       letter-spacing: 0.04rem;
@@ -168,7 +163,7 @@
       font-weight: 400;
     }
 
-    /* Main Content */
+    
     main {
       background: linear-gradient(135deg, #155a45 40%, #0e3b2f 90%);
       border-radius: 25px;
@@ -181,7 +176,7 @@
       position: relative;
     }
 
-    /* New Label */
+    
     .new-label {
       display: inline-block;
       background: #93bf5b;
@@ -192,7 +187,7 @@
       letter-spacing: 0.04rem;
     }
 
-    /* Element Icon created with CSS heart + leaf */
+    
     .element-icon {
       font-size: 3.5rem;
       color: #a6dd8c;
@@ -206,14 +201,14 @@
     }
 
     .element-icon::before {
-      content: "♣"; /* Clover symbol as a proxy for element icon */
+      content: "♣"; 
       font-weight: bold;
       font-size: 3.5rem;
       color: #a6dd8c;
       filter: drop-shadow(0 0 5px #80bb48);
     }
 
-    /* Character name */
+    
     .char-name {
       font-family: 'Georgia', serif;
       font-weight: 900;
@@ -237,7 +232,7 @@
       text-shadow: 0 0 4px #b88f00;
     }
 
-    /* Separator */
+   
     .separator {
       width: 140px;
       height: 2px;
@@ -257,7 +252,7 @@
       user-select: none;
     }
 
-    /* Character Image Block */
+    
     .char-image {
       grid-column: 3;
       grid-row: 1 / 2;
@@ -275,7 +270,7 @@
       border-radius: 12px;
     }
 
-    /* Right side action buttons */
+    
     .right-icons {
       position: absolute;
       top: 160px;
@@ -309,7 +304,7 @@
       box-shadow: 0 0 20px #a0d053;
     }
 
-    /* Footer */
+    
     footer {
       grid-column: 1 / 4;
       grid-row: 2;
@@ -333,7 +328,7 @@
       filter: drop-shadow(0 0 3px #8abb51);
     }
 
-    /* Footer Genshin logo as text with style */
+    
     .footer-logo .logo {
       font-weight: 900;
       font-size: 1.5rem;
@@ -343,7 +338,7 @@
       user-select: none;
     }
 
-    /* Footer message */
+    
     footer .footer-message {
       flex-grow: 1;
       text-align: center;
@@ -354,7 +349,7 @@
       text-shadow: 0 0 5px #729a4a;
     }
 
-    /* Download Button */
+    
     .btn-download {
       background: #569446;
       border-radius: 30px;
@@ -377,7 +372,7 @@
       color: #26511d;
     }
 
-    /* Responsive */
+    
     @media (max-width: 1145px) {
       .container {
         grid-template-columns: 200px 1fr;
@@ -399,7 +394,7 @@
 
 <body>
   <div class="container">
-    <!-- Navigation Sidebar -->
+    
     <nav aria-label="Website navigation">
       <h1>Characters · Weapons</h1>
       <a href="index.html" class="active">.HOME</a>
@@ -412,7 +407,7 @@
       </p>
     </nav>
 
-    <!-- Main Content -->
+    
     <main role="main" aria-label="Character details">
       <div class="element-icon" aria-hidden="true"></div>
       <div class="new-label">NEW</div>
@@ -426,10 +421,8 @@
       <div class="separator"></div>
     </main>
 
-    <!-- Right Side Character Image -->
     
 
-    <!-- Right side action buttons -->
     <div class="right-icons" aria-label="Character actions">
       <button title="Profile" aria-pressed="false">👤</button>
       <button title="Weapon" aria-pressed="true" class="active">⚔️</button>
