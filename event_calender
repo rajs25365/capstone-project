@@ -1,0 +1,22 @@
+document.addEventListener('DOMContentLoaded', function() {
+    
+    const navLinks = document.querySelectorAll('nav.sidebar a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            console.log('Navigating to: ' + this.href);
+           
+        });
+    });
+    
+    const goButtons = document.querySelectorAll('.btn-go');
+    goButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            alert('Going to event details! (Redirect or modal here)');
+        });
+    });
+   
+    const downloadBtn = document.querySelector('.download-btn');
+    downloadBtn.addEventListener('click', function() {
+        window.location.href = 'https://www.hoyoplay.com/'; 
+    });
+});
