@@ -733,6 +733,270 @@ p {
   font-size: 1.02rem;
 }
 
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(140, 164, 229, 0.4);
+  padding: 0.25rem 0.55rem;
+  font: 700 0.74rem/1 "Manrope", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c8d8ff;
+  background: rgba(17, 28, 53, 0.82);
+}
+
+.status-badge.status-online {
+  border-color: rgba(113, 240, 196, 0.66);
+  color: #82f5cb;
+}
+
+.status-badge.status-busy {
+  border-color: rgba(255, 208, 124, 0.66);
+  color: #ffd98f;
+}
+
+.status-badge.status-maintenance {
+  border-color: rgba(235, 150, 150, 0.72);
+  color: #ffb1b1;
+}
+
+.community-badges {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  color: var(--ink-soft);
+}
+
+.home-community-panel {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.community-pulse-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.pulse-card {
+  border-radius: 14px;
+  border: 1px solid rgba(148, 173, 238, 0.32);
+  background: rgba(11, 19, 39, 0.65);
+  padding: 0.9rem;
+  display: grid;
+  gap: 0.44rem;
+}
+
+.pulse-card h3 {
+  font-size: 1.14rem;
+}
+
+.pulse-card .btn {
+  width: fit-content;
+}
+
+.squad-builder-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.squad-builder-grid label {
+  display: grid;
+  gap: 0.38rem;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+.squad-builder-grid select,
+.coop-form input,
+.coop-form select,
+.fan-form input {
+  border-radius: 10px;
+  border: 1px solid rgba(139, 164, 232, 0.38);
+  background: rgba(10, 18, 36, 0.84);
+  color: var(--ink);
+  font: 600 0.92rem/1.2 "Rajdhani", sans-serif;
+  padding: 0.55rem 0.58rem;
+  outline: none;
+}
+
+.squad-builder-grid select:focus,
+.coop-form input:focus,
+.coop-form select:focus,
+.fan-form input:focus {
+  border-color: rgba(125, 237, 255, 0.82);
+  box-shadow: 0 0 0 2px rgba(106, 217, 255, 0.2);
+}
+
+.team-result {
+  margin-top: 0.65rem;
+  color: #c6f1ff;
+  font-weight: 600;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.chip {
+  border-radius: 999px;
+  border: 1px solid rgba(147, 171, 238, 0.38);
+  background: rgba(19, 29, 56, 0.72);
+  padding: 0.25rem 0.5rem;
+  color: #c8d5f7;
+  font-size: 0.78rem;
+}
+
+.team-tags {
+  margin-top: 0.58rem;
+}
+
+.coop-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 0.55rem;
+}
+
+.fan-form {
+  display: grid;
+  grid-template-columns: 1fr 2fr auto;
+  gap: 0.55rem;
+}
+
+.coop-list,
+.fan-wall-list {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.queue-item,
+.fan-item {
+  border-radius: 10px;
+  border: 1px solid rgba(139, 164, 232, 0.28);
+  background: rgba(11, 19, 39, 0.66);
+  padding: 0.54rem 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.fan-item {
+  display: grid;
+  justify-content: initial;
+}
+
+.fan-item strong {
+  color: #b7f3ff;
+}
+
+.fan-empty {
+  border-radius: 10px;
+  border: 1px dashed rgba(145, 170, 236, 0.32);
+  background: rgba(10, 18, 35, 0.55);
+  padding: 0.58rem 0.65rem;
+  color: var(--ink-soft);
+}
+
+.queue-item button {
+  border: 1px solid rgba(233, 164, 164, 0.48);
+  background: rgba(79, 31, 45, 0.6);
+  color: #ffc7d5;
+  border-radius: 999px;
+  font: 700 0.72rem/1 "Manrope", sans-serif;
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+}
+
+.community-hero {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 0.9rem;
+  align-items: center;
+}
+
+.community-hero-copy {
+  display: grid;
+  gap: 0.72rem;
+}
+
+.community-hero h1 {
+  margin-top: 0.25rem;
+  font-size: clamp(1.75rem, 3.8vw, 3rem);
+  line-height: 1.08;
+}
+
+.community-hero-metrics {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.6rem;
+}
+
+.guild-grid,
+.vote-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.vote-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.guild-card,
+.vote-card,
+.spotlight-card {
+  border-radius: 14px;
+  border: 1px solid rgba(148, 173, 238, 0.32);
+  background: rgba(11, 19, 39, 0.65);
+  padding: 0.88rem;
+  display: grid;
+  gap: 0.44rem;
+}
+
+.guild-card h3,
+.vote-card h3,
+.spotlight-card h3 {
+  font-size: 1rem;
+}
+
+.vote-card .btn {
+  width: fit-content;
+}
+
+.vote-count {
+  color: #bdefff;
+  font-weight: 700;
+}
+
+.spotlight-track {
+  display: flex;
+  transition: transform 0.45s ease;
+}
+
+.spotlight-card {
+  min-width: 100%;
+  background:
+    linear-gradient(130deg, rgba(91, 70, 172, 0.26), rgba(29, 40, 77, 0.7)),
+    rgba(14, 21, 40, 0.86);
+}
+
+.spotlight-card .label {
+  color: #86edff;
+  font: 700 0.72rem/1 "Manrope", sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
 .site-footer {
   width: min(1160px, calc(100vw - 1.2rem));
   margin: 0 auto 1.4rem;
@@ -782,7 +1046,8 @@ p {
 
 @media (max-width: 1020px) {
   .hero,
-  .character-shell {
+  .character-shell,
+  .community-hero {
     grid-template-columns: 1fr;
   }
 
@@ -795,8 +1060,23 @@ p {
   .roster-grid,
   .event-grid,
   .stat-grid,
-  .metrics-grid {
+  .metrics-grid,
+  .community-pulse-grid,
+  .guild-grid,
+  .vote-grid,
+  .squad-builder-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .coop-form,
+  .fan-form {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .coop-form .btn,
+  .fan-form .btn {
+    grid-column: 1 / -1;
+    width: fit-content;
   }
 
   .site-header {
@@ -834,7 +1114,16 @@ p {
   .event-grid,
   .stat-grid,
   .metrics-grid,
-  .ability-grid {
+  .ability-grid,
+  .community-pulse-grid,
+  .guild-grid,
+  .vote-grid,
+  .squad-builder-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .coop-form,
+  .fan-form {
     grid-template-columns: 1fr;
   }
 
