@@ -110,9 +110,280 @@ function setupParallax() {
 }
 
 function initHomePage() {
-  initNewsCarousel();
-  initCommissionTracker();
-  initCommunityPulse();
+  initOpeningGate();
+  initCinematicHero();
+  initHomeLiveFeed();
+  initHomeModeCards();
+  initHomeCharacterPremiere();
+  initHomeNewsTabs();
+  initHomeRealmAtlas();
+}
+
+function initOpeningGate() {
+  const gate = document.querySelector("[data-opening-gate]");
+  const enterButton = document.querySelector("[data-opening-enter]");
+  const skipButton = document.querySelector("[data-opening-skip]");
+
+  if (!gate || !enterButton || !skipButton) {
+    return;
+  }
+
+  const storageKey = "neon-opening-gate-seen";
+  const hasSeenGate = readStorage(storageKey, false) === true;
+
+  if (hasSeenGate) {
+    gate.classList.add("is-hidden");
+    return;
+  }
+
+  document.body.classList.add("gate-locked");
+
+  const closeGate = () => {
+    gate.classList.add("is-leaving");
+    window.setTimeout(() => {
+      gate.classList.add("is-hidden");
+      document.body.classList.remove("gate-locked");
+    }, 420);
+    writeStorage(storageKey, true);
+  };
+
+  enterButton.addEventListener("click", closeGate);
+  skipButton.addEventListener("click", closeGate);
+
+  window.addEventListener("keydown", (event) => {
+    if (gate.classList.contains("is-hidden")) {
+      return;
+    }
+
+    if (event.key === "Enter") {
+      closeGate();
+    }
+  });
+}
+
+function initHomeLiveFeed() {
+  const feedNode = document.querySelector("[data-live-feed-text]");
+
+  if (!feedNode) {
+    return;
+  }
+
+  const messages = [
+    "Live Feed: Fresh armored convoy job goes live in 02h 13m.",
+    "Live Feed: Heist lobbies are hitting peak activity downtown.",
+    "Live Feed: Midnight race season phase two starts tomorrow.",
+    "Live Feed: Social Club tournament signups close in 8h.",
+  ];
+
+  let index = 0;
+  feedNode.textContent = messages[index];
+
+  window.setInterval(() => {
+    index = (index + 1) % messages.length;
+    feedNode.textContent = messages[index];
+  }, 5200);
+}
+
+function initHomeModeCards() {
+  const cards = Array.from(document.querySelectorAll("[data-mode-card]"));
+  const hintNode = document.querySelector("[data-mode-hint]");
+
+  if (!cards.length || !hintNode) {
+    return;
+  }
+
+  const setMode = (card) => {
+    cards.forEach((node) => {
+      node.classList.toggle("is-active", node === card);
+    });
+
+    const title = card.dataset.modeTitle || "Mode";
+    const desc = card.dataset.modeDesc || "No mode details available.";
+    hintNode.textContent = `${title}: ${desc}`;
+  };
+
+  cards.forEach((card) => {
+    card.addEventListener("click", () => setMode(card));
+  });
+
+  const initialCard = cards.find((card) => card.classList.contains("is-active")) || cards[0];
+  setMode(initialCard);
+}
+
+function initCinematicHero() {
+  const slides = Array.from(document.querySelectorAll("[data-hero-slide]"));
+  const dots = Array.from(document.querySelectorAll("[data-hero-dot]"));
+  const stage = document.querySelector("[data-cinematic-stage]");
+
+  if (!slides.length) {
+    return;
+  }
+
+  let index = slides.findIndex((slide) => slide.classList.contains("is-active"));
+  if (index < 0) {
+    index = 0;
+  }
+
+  let intervalId = null;
+
+  const setActive = (nextIndex) => {
+    index = (nextIndex + slides.length) % slides.length;
+
+    slides.forEach((slide, slideIndex) => {
+      slide.classList.toggle("is-active", slideIndex === index);
+    });
+
+    dots.forEach((dot, dotIndex) => {
+      dot.classList.toggle("is-active", dotIndex === index);
+    });
+  };
+
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      const nextIndex = Number(dot.dataset.heroDot || 0);
+      setActive(nextIndex);
+    });
+  });
+
+  const moveNext = () => {
+    setActive(index + 1);
+  };
+
+  const stopAuto = () => {
+    if (intervalId) {
+      window.clearInterval(intervalId);
+      intervalId = null;
+    }
+  };
+
+  const startAuto = () => {
+    stopAuto();
+    intervalId = window.setInterval(moveNext, 6500);
+  };
+
+  if (stage) {
+    stage.addEventListener("mouseenter", stopAuto);
+    stage.addEventListener("mouseleave", startAuto);
+  }
+
+  setActive(index);
+  startAuto();
+}
+
+function initHomeCharacterPremiere() {
+  const cards = Array.from(document.querySelectorAll(".home-char-card"));
+  const imageNode = document.querySelector("[data-home-char-image]");
+  const nameNode = document.querySelector("[data-home-char-name]");
+  const roleNode = document.querySelector("[data-home-char-role]");
+  const loreNode = document.querySelector("[data-home-char-lore]");
+  const tagNode = document.querySelector("[data-home-char-elements]");
+
+  if (!cards.length || !imageNode || !nameNode || !roleNode || !loreNode || !tagNode) {
+    return;
+  }
+
+  const updateSpotlight = (card) => {
+    const name = card.dataset.charName || "Unknown Crew Member";
+    const role = card.dataset.charRole || "Unknown Role";
+    const lore = card.dataset.charLore || "No lore available.";
+    const image = card.dataset.charImage || imageNode.src;
+    const tags = String(card.dataset.charElements || "").split("|").filter((tag) => tag.trim().length > 0);
+
+    cards.forEach((node) => {
+      node.classList.toggle("is-active", node === card);
+    });
+
+    nameNode.textContent = name;
+    roleNode.textContent = role;
+    loreNode.textContent = lore;
+    imageNode.src = image;
+    imageNode.alt = `${name} spotlight portrait`;
+
+    tagNode.innerHTML = tags.map((tag) => `<span class="chip">${tag}</span>`).join("");
+  };
+
+  cards.forEach((card) => {
+    card.addEventListener("click", () => updateSpotlight(card));
+    card.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        updateSpotlight(card);
+      }
+    });
+  });
+
+  const initialCard = cards.find((card) => card.classList.contains("is-active")) || cards[0];
+  updateSpotlight(initialCard);
+}
+
+function initHomeNewsTabs() {
+  const buttons = Array.from(document.querySelectorAll("[data-news-tab-button]"));
+  const panes = Array.from(document.querySelectorAll("[data-news-pane]"));
+
+  if (!buttons.length || !panes.length) {
+    return;
+  }
+
+  const activate = (tab) => {
+    buttons.forEach((button) => {
+      button.classList.toggle("is-active", button.dataset.newsTabButton === tab);
+    });
+
+    panes.forEach((pane) => {
+      pane.classList.toggle("is-active", pane.dataset.newsPane === tab);
+    });
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      activate(button.dataset.newsTabButton || "updates");
+    });
+  });
+
+  const initialButton = buttons.find((button) => button.classList.contains("is-active")) || buttons[0];
+  activate(initialButton.dataset.newsTabButton || "updates");
+}
+
+function initHomeRealmAtlas() {
+  const regionButtons = Array.from(document.querySelectorAll("[data-region-node]"));
+  const nameNode = document.querySelector("[data-region-name-display]");
+  const descNode = document.querySelector("[data-region-desc-display]");
+  const progressNode = document.querySelector("[data-region-progress-display]");
+  const threatNode = document.querySelector("[data-region-threat-display]");
+  const barNode = document.querySelector("[data-region-progress-bar]");
+  const tagsNode = document.querySelector("[data-region-tags]");
+
+  if (!regionButtons.length || !nameNode || !descNode || !progressNode || !threatNode || !barNode || !tagsNode) {
+    return;
+  }
+
+  const renderRegion = (button) => {
+    regionButtons.forEach((node) => {
+      node.classList.toggle("is-active", node === button);
+    });
+
+    const name = button.dataset.regionName || "Unknown Region";
+    const desc = button.dataset.regionDesc || "No region details available.";
+    const threat = button.dataset.regionThreat || "Unlisted";
+    const progress = Number(button.dataset.regionProgress || 0);
+    const tags = String(button.dataset.regionFocus || "").split("|").filter((tag) => tag.trim().length > 0);
+
+    nameNode.textContent = name;
+    descNode.textContent = desc;
+    threatNode.textContent = threat;
+    progressNode.textContent = `${Math.max(0, Math.min(100, progress))}%`;
+    barNode.style.width = `${Math.max(0, Math.min(100, progress))}%`;
+    tagsNode.innerHTML = tags.map((tag) => `<span class="chip">${tag}</span>`).join("");
+  };
+
+  regionButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      renderRegion(button);
+    });
+  });
+
+  const initialButton = regionButtons.find((button) => button.classList.contains("is-active")) || regionButtons[0];
+  renderRegion(initialButton);
 }
 
 function initNewsCarousel() {
@@ -183,7 +454,7 @@ function initCommissionTracker() {
   }
 
   const checkboxes = Array.from(list.querySelectorAll("input[type='checkbox']"));
-  const storageKey = "gamora-commission-state";
+  const storageKey = "neon-commission-state";
 
   const savedState = readStorage(storageKey, {});
 
@@ -300,7 +571,7 @@ function initRosterSelection() {
     const rarity = Number(card.dataset.rarity || 4);
 
     if (nameNode) {
-      nameNode.textContent = card.dataset.name || "Unknown Operative";
+      nameNode.textContent = card.dataset.name || "Unknown Crew Member";
     }
 
     if (elementNode) {
@@ -317,7 +588,7 @@ function initRosterSelection() {
 
     if (imageNode) {
       imageNode.src = card.dataset.image || imageNode.src;
-      imageNode.alt = `${card.dataset.name || "Operative"} portrait`;
+      imageNode.alt = `${card.dataset.name || "Crew Member"} portrait`;
     }
 
     if (starsNode) {
@@ -386,11 +657,11 @@ function initWishSimulator() {
     return;
   }
 
-  const fiveStarPool = ["Lyra Stormveil", "Kairo Embermace", "Eon Mariner"];
-  const fourStarPool = ["Mira Tideshade", "Rook Granite", "Vexa Pulse", "Sorin Gale", "Nora Cinderfield"];
-  const threeStarPool = ["Iron Pike", "Aster Tome", "Ranger Bow", "Silver Blade"];
+  const fiveStarPool = ["Rico Vega", "Dante Blaze", "Ace Marino"];
+  const fourStarPool = ["Maya Cruz", "Bruno Steel", "Vee Sparks", "Jax Mercer", "Nina Volt"];
+  const threeStarPool = ["Street Pistol", "Budget SMG", "Compact Shotgun", "Iron Bat"];
 
-  const pityStorage = "gamora-wish-pity";
+  const pityStorage = "neon-crate-pity";
   let pity = Number(readStorage(pityStorage, 0));
 
   const pullOnce = () => {
@@ -479,16 +750,16 @@ function initSquadBuilder() {
   }));
 
   const options = roster
-    .map((operative) => `<option value="${operative.name}">${operative.name}</option>`)
+    .map((member) => `<option value="${member.name}">${member.name}</option>`)
     .join("");
 
   slots.forEach((slot) => {
-    slot.innerHTML = `<option value="">Choose operative</option>${options}`;
+    slot.innerHTML = `<option value="">Choose crew member</option>${options}`;
     slot.addEventListener("change", renderTeam);
   });
 
   if (autoButton) {
-    const metaTeam = ["Lyra Stormveil", "Kairo Embermace", "Mira Tideshade", "Rook Granite"];
+    const metaTeam = ["Rico Vega", "Dante Blaze", "Maya Cruz", "Ace Marino"];
     autoButton.addEventListener("click", () => {
       slots.forEach((slot, index) => {
         slot.value = metaTeam[index] || "";
@@ -499,11 +770,11 @@ function initSquadBuilder() {
 
   function renderTeam() {
     const selected = slots
-      .map((slot) => roster.find((operative) => operative.name === slot.value))
+      .map((slot) => roster.find((member) => member.name === slot.value))
       .filter((item) => Boolean(item));
 
     if (selected.length < 4) {
-      resultNode.textContent = `Select ${4 - selected.length} more operatives to score this squad.`;
+      resultNode.textContent = `Select ${4 - selected.length} more crew members to score this crew.`;
       tagsNode.innerHTML = "";
       return;
     }
@@ -512,52 +783,52 @@ function initSquadBuilder() {
     const hasDuplicate = selectedNames.some((name, index) => selectedNames.indexOf(name) !== index);
 
     if (hasDuplicate) {
-      resultNode.textContent = "Duplicate picks detected. Use four unique operatives for a valid team.";
+      resultNode.textContent = "Duplicate picks detected. Use four unique crew members for a valid lineup.";
       tagsNode.innerHTML = '<span class="chip">Invalid composition</span>';
       return;
     }
 
-    const elementCounts = selected.reduce((acc, operative) => {
-      acc[operative.element] = (acc[operative.element] || 0) + 1;
+    const elementCounts = selected.reduce((acc, member) => {
+      acc[member.element] = (acc[member.element] || 0) + 1;
       return acc;
     }, {});
 
     const tags = [];
     let score = 40;
 
-    const rarityScore = selected.reduce((sum, operative) => sum + operative.rarity, 0);
+    const rarityScore = selected.reduce((sum, member) => sum + member.rarity, 0);
     score += rarityScore * 6;
 
-    const hasResonance = Object.values(elementCounts).some((count) => count >= 2);
-    if (hasResonance) {
-      tags.push("Elemental resonance");
+    const hasRolePairing = Object.values(elementCounts).some((count) => count >= 2);
+    if (hasRolePairing) {
+      tags.push("Role pairing bonus");
       score += 10;
     }
 
-    if (elementCounts.aero && elementCounts.tide) {
-      tags.push("Aero + Tide combo");
+    if (elementCounts.wheelman && elementCounts.hacker) {
+      tags.push("Clean getaway protocol");
       score += 9;
     }
 
-    if (elementCounts.ember && elementCounts.tide) {
-      tags.push("Vapor chain combo");
+    if (elementCounts.muscle && elementCounts.shooter) {
+      tags.push("Heavy pressure combo");
       score += 11;
     }
 
-    if (elementCounts.volt && elementCounts.aero) {
-      tags.push("Crowd control overload");
+    if (elementCounts.scout && elementCounts.hacker) {
+      tags.push("Intel control package");
       score += 8;
     }
 
     const uniqueElements = Object.keys(elementCounts).length;
     if (uniqueElements >= 3) {
-      tags.push("Wide elemental coverage");
+      tags.push("Flexible crew coverage");
       score += 8;
     }
 
-    const roleCoverage = new Set(selected.map((operative) => operative.role.toLowerCase()));
-    if ([...roleCoverage].some((role) => role.includes("support") || role.includes("healer"))) {
-      tags.push("Sustain ready");
+    const roleCoverage = new Set(selected.map((member) => member.role.toLowerCase()));
+    if ([...roleCoverage].some((role) => role.includes("hacker") || role.includes("scout") || role.includes("planner"))) {
+      tags.push("Intel network ready");
       score += 6;
     }
 
@@ -568,7 +839,7 @@ function initSquadBuilder() {
       score >= 80 ? "A Tier" :
       score >= 70 ? "B Tier" : "C Tier";
 
-    resultNode.textContent = `Squad score ${score}/100 | ${rank} composition for endgame content.`;
+    resultNode.textContent = `Crew score ${score}/100 | ${rank} setup for high-heat city jobs.`;
 
     tagsNode.innerHTML = tags.map((tag) => `<span class="chip">${tag}</span>`).join("");
   }
@@ -605,7 +876,7 @@ function initEventsPage() {
       const progressNode = card.querySelector("[data-progress]");
 
       let status = "ended";
-      let countdownText = "Event closed";
+      let countdownText = "Job closed";
       let progress = 100;
 
       if (Number.isFinite(start) && Number.isFinite(end)) {
@@ -621,7 +892,7 @@ function initEventsPage() {
           liveCount += 1;
         } else {
           status = "ended";
-          countdownText = "Event closed";
+          countdownText = "Job closed";
           progress = 100;
           endedCount += 1;
         }
@@ -632,7 +903,10 @@ function initEventsPage() {
       card.classList.add(`status-${status}`);
 
       if (statusNode) {
-        statusNode.textContent = status;
+        const statusLabel =
+          status === "live" ? "Live Job" :
+          status === "upcoming" ? "Incoming" : "Closed";
+        statusNode.textContent = statusLabel;
       }
 
       if (countdownNode) {
@@ -722,7 +996,7 @@ function initCoopQueue() {
     return;
   }
 
-  const storageKey = "gamora-coop-queue";
+  const storageKey = "neon-coop-queue";
   let entries = readStorage(storageKey, []);
 
   if (!Array.isArray(entries)) {
@@ -739,7 +1013,7 @@ function initCoopQueue() {
     if (!entries.length) {
       const empty = document.createElement("li");
       empty.className = "fan-empty";
-      empty.textContent = "No co-op entries yet. Add your role to start a squad.";
+      empty.textContent = "No crew entries yet. Add your role to start a run.";
       list.appendChild(empty);
     } else {
       entries.forEach((entry, index) => {
@@ -821,7 +1095,7 @@ function initCommunityVote() {
     return;
   }
 
-  const storageKey = "gamora-community-votes";
+  const storageKey = "neon-community-votes";
   const defaultVotes = {
     burst: 12,
     carry: 8,
@@ -880,7 +1154,7 @@ function initFanWall() {
     return;
   }
 
-  const storageKey = "gamora-fan-wall";
+  const storageKey = "neon-fan-wall";
   let posts = readStorage(storageKey, []);
 
   if (!Array.isArray(posts)) {
@@ -897,7 +1171,7 @@ function initFanWall() {
     if (!posts.length) {
       const empty = document.createElement("li");
       empty.className = "fan-empty";
-      empty.textContent = "No posts yet. Be the first to post.";
+      empty.textContent = "No street feed posts yet. Be the first to post.";
       list.appendChild(empty);
       return;
     }
@@ -1013,9 +1287,9 @@ function initCommunityHeaderPulse() {
   }
 
   const states = [
-    { className: "status-online", label: "Server online" },
+    { className: "status-online", label: "Lobbies live" },
     { className: "status-busy", label: "Peak traffic" },
-    { className: "status-online", label: "Raid queues open" },
+    { className: "status-online", label: "Heist queues open" },
   ];
 
   const update = () => {

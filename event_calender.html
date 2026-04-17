@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gamora Odyssey | Event Radar</title>
+  <title>Neon District | City Job Board</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&family=Manrope:wght@500;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;500;600;700;800&family=Manrope:wght@500;700&display=swap"
     rel="stylesheet"
   />
   <link rel="stylesheet" href="styles.css" />
@@ -20,8 +20,8 @@
     <a href="index.html" class="brand">
       <span class="brand-mark">GO</span>
       <span class="brand-text">
-        <strong>Gamora Odyssey</strong>
-        <small>Action RPG Command Center</small>
+        <strong>Neon District</strong>
+        <small>Open-World Crime Action Hub</small>
       </span>
     </a>
 
@@ -29,164 +29,164 @@
 
     <nav class="site-nav" data-nav>
       <a href="index.html" data-page-link="home">Home</a>
-      <a href="startgame.html" data-page-link="characters">Operatives</a>
-      <a href="event_calender.html" data-page-link="events">Event Radar</a>
-      <a href="community.html" data-page-link="community">Community</a>
+      <a href="startgame.html" data-page-link="characters">Crew</a>
+      <a href="event_calender.html" data-page-link="events">City Events</a>
+      <a href="community.html" data-page-link="community">Social Club</a>
     </nav>
   </header>
 
   <main class="page page-events">
     <section class="panel events-hero" data-reveal>
       <div>
-        <p class="kicker">Live-Service Mission Board</p>
-        <h1>Track every event window before it expires.</h1>
+        <p class="kicker">Live City Job Board</p>
+        <h1>Track every mission window before it disappears.</h1>
         <p class="intro-text">
-          This radar tracks active, upcoming, and finished activities so your resin, pulls, and weekly targets stay optimized.
+          Follow active contracts, incoming city jobs, and completed runs so your crew never misses payout opportunities.
         </p>
       </div>
 
       <div class="metrics-grid">
         <article class="stat-card">
           <h3 data-live-count>0</h3>
-          <p>Live Events</p>
+          <p>Live Jobs</p>
         </article>
         <article class="stat-card">
           <h3 data-upcoming-count>0</h3>
-          <p>Upcoming Events</p>
+          <p>Upcoming Jobs</p>
         </article>
         <article class="stat-card">
           <h3 data-ended-count>0</h3>
-          <p>Archived Events</p>
+          <p>Closed Jobs</p>
         </article>
       </div>
     </section>
 
     <section class="panel event-panel" data-reveal>
       <div class="section-head">
-        <h2>Mission Timeline</h2>
+        <h2>Job Timeline</h2>
         <div class="filter-row" data-event-filters>
           <button class="active" type="button" data-event-filter="all">All</button>
           <button type="button" data-event-filter="live">Live</button>
           <button type="button" data-event-filter="upcoming">Upcoming</button>
           <button type="button" data-event-filter="ended">Ended</button>
-          <button type="button" data-event-filter="combat">Combat</button>
-          <button type="button" data-event-filter="story">Story</button>
-          <button type="button" data-event-filter="web">Web</button>
+          <button type="button" data-event-filter="heist">Heists</button>
+          <button type="button" data-event-filter="race">Races</button>
+          <button type="button" data-event-filter="online">Online</button>
         </div>
       </div>
 
       <div class="event-grid">
         <article
           class="event-card"
-          data-event-type="combat"
+          data-event-type="heist"
           data-start="2026-04-12T05:00:00Z"
           data-end="2026-04-27T04:59:00Z"
         >
           <header>
-            <h3>Crimson Gauntlet Protocol</h3>
+            <h3>Downtown Vault Break</h3>
             <span class="status-pill" data-status-text>Loading</span>
           </header>
-          <p>Sequential elite challenge floors with adaptive enemy modifiers.</p>
+          <p>Multi-phase vault operation with rotating security and timed extraction windows.</p>
           <p class="countdown" data-countdown>Syncing timeline...</p>
           <div class="progress-meter"><span data-progress></span></div>
           <div class="reward-line">
-            <span>420 Stellar Gems</span>
-            <span>Weapon Mold x1</span>
+            <span>$420,000 Cash</span>
+            <span>Armored Blueprint x1</span>
           </div>
         </article>
 
         <article
           class="event-card"
-          data-event-type="story"
+          data-event-type="online"
           data-start="2026-04-16T05:00:00Z"
           data-end="2026-05-03T04:59:00Z"
         >
           <header>
-            <h3>Echoes of the Hollow Moon</h3>
+            <h3>District Turf Push</h3>
             <span class="status-pill" data-status-text>Loading</span>
           </header>
-          <p>Narrative investigation arc with multi-ending branch outcomes.</p>
+          <p>Online territory war with district influence control and weekly rank payouts.</p>
           <p class="countdown" data-countdown>Syncing timeline...</p>
           <div class="progress-meter"><span data-progress></span></div>
           <div class="reward-line">
-            <span>360 Stellar Gems</span>
-            <span>Resonance Relic</span>
+            <span>$360,000 Cash</span>
+            <span>Exclusive Crew Tag</span>
           </div>
         </article>
 
         <article
           class="event-card"
-          data-event-type="web"
+          data-event-type="race"
           data-start="2026-04-20T05:00:00Z"
           data-end="2026-04-29T04:59:00Z"
         >
           <header>
-            <h3>Navigator Mini App</h3>
+            <h3>Midnight Circuit Cup</h3>
             <span class="status-pill" data-status-text>Loading</span>
           </header>
-          <p>Browser event with puzzle routing and daily check-in rewards.</p>
+          <p>Night race ladder with tuning restrictions and leaderboard class rewards.</p>
           <p class="countdown" data-countdown>Syncing timeline...</p>
           <div class="progress-meter"><span data-progress></span></div>
           <div class="reward-line">
-            <span>200 Stellar Gems</span>
-            <span>3 Fate Tickets</span>
+            <span>$200,000 Cash</span>
+            <span>Performance Kit x3</span>
           </div>
         </article>
 
         <article
           class="event-card"
-          data-event-type="combat"
+          data-event-type="heist"
           data-start="2026-03-30T05:00:00Z"
           data-end="2026-04-11T04:59:00Z"
         >
           <header>
-            <h3>Frostline Survival Trial</h3>
+            <h3>Port Container Sweep</h3>
             <span class="status-pill" data-status-text>Loading</span>
           </header>
-          <p>Temperature-control challenge with shifting blizzard zones.</p>
+          <p>Dockyard intercept operation focused on high-value cargo extraction routes.</p>
           <p class="countdown" data-countdown>Syncing timeline...</p>
           <div class="progress-meter"><span data-progress></span></div>
           <div class="reward-line">
-            <span>280 Stellar Gems</span>
-            <span>Ore Cache x12</span>
+            <span>$280,000 Cash</span>
+            <span>Supply Crate x12</span>
           </div>
         </article>
 
         <article
           class="event-card"
-          data-event-type="story"
+          data-event-type="online"
           data-start="2026-05-01T05:00:00Z"
           data-end="2026-05-22T04:59:00Z"
         >
           <header>
-            <h3>Siege of Lumen Harbor</h3>
+            <h3>Citywide Heatwave</h3>
             <span class="status-pill" data-status-text>Loading</span>
           </header>
-          <p>Faction alliance chapter introducing a new 5-star operative.</p>
+          <p>High-intensity law enforcement phase with boosted bounty and elite contracts.</p>
           <p class="countdown" data-countdown>Syncing timeline...</p>
           <div class="progress-meter"><span data-progress></span></div>
           <div class="reward-line">
-            <span>520 Stellar Gems</span>
-            <span>Limited Namecard</span>
+            <span>$520,000 Cash</span>
+            <span>Limited Vehicle Wrap</span>
           </div>
         </article>
 
         <article
           class="event-card"
-          data-event-type="web"
+          data-event-type="race"
           data-start="2026-04-08T05:00:00Z"
           data-end="2026-04-25T04:59:00Z"
         >
           <header>
-            <h3>Strategist Dispatch Board</h3>
+            <h3>Back Alley Sprint League</h3>
             <span class="status-pill" data-status-text>Loading</span>
           </header>
-          <p>Time-gated dispatch planner with account-wide expedition perks.</p>
+          <p>Short-form urban sprint series with drift score multipliers and crew ranking bonuses.</p>
           <p class="countdown" data-countdown>Syncing timeline...</p>
           <div class="progress-meter"><span data-progress></span></div>
           <div class="reward-line">
-            <span>260 Stellar Gems</span>
-            <span>Talent Kit x6</span>
+            <span>$260,000 Cash</span>
+            <span>Tuning Parts x6</span>
           </div>
         </article>
       </div>
@@ -194,36 +194,36 @@
 
     <section class="panel planner-panel" data-reveal>
       <div class="section-head">
-        <h2>Gem Reward Planner</h2>
-        <small>Estimate how many gems you can farm this cycle.</small>
+        <h2>Cash Planner</h2>
+        <small>Estimate how much cash your crew can farm this cycle.</small>
       </div>
 
       <label for="daysRange">Active days this cycle: <strong data-days-output>14</strong></label>
       <input id="daysRange" type="range" min="1" max="30" value="14" data-days-slider />
 
       <div class="bonus-options">
-        <label><input type="checkbox" data-bonus="320" checked /> Premium pass active (+320)</label>
-        <label><input type="checkbox" data-bonus="180" /> Weekly raid clear (+180)</label>
-        <label><input type="checkbox" data-bonus="240" checked /> Spiral challenge complete (+240)</label>
+        <label><input type="checkbox" data-bonus="320" checked /> Premium membership (+320)</label>
+        <label><input type="checkbox" data-bonus="180" /> Weekly convoy clear (+180)</label>
+        <label><input type="checkbox" data-bonus="240" checked /> City challenge complete (+240)</label>
       </div>
 
-      <p class="planner-total">Estimated total gems: <strong data-gem-total>0</strong></p>
+      <p class="planner-total">Estimated total payout: <strong data-gem-total>0</strong></p>
     </section>
 
     <section class="panel coop-panel" data-reveal>
       <div class="section-head">
-        <h2>Community Co-op Queue</h2>
-        <small>Post your slot so other players can form teams quickly.</small>
+        <h2>Crew Matchmaking Queue</h2>
+        <small>Post your role so other players can form a complete heist team quickly.</small>
       </div>
 
       <form class="coop-form" data-coop-form>
         <input type="text" name="alias" maxlength="20" placeholder="Your alias" required />
         <select name="role" required>
           <option value="">Select role</option>
-          <option value="DPS">DPS</option>
+          <option value="Driver">Driver</option>
+          <option value="Gunner">Gunner</option>
+          <option value="Hacker">Hacker</option>
           <option value="Support">Support</option>
-          <option value="Healer">Healer</option>
-          <option value="Tank">Tank</option>
         </select>
         <select name="region" required>
           <option value="">Select region</option>
@@ -244,8 +244,8 @@
   </main>
 
   <footer class="site-footer">
-    <p>Never miss a banner window, challenge reset, or bonus payout again.</p>
-    <p>Copyright <span data-year></span> Gamora Interactive</p>
+    <p>Never miss a city job window, challenge reset, or payout event again.</p>
+    <p>Copyright <span data-year></span> Neon District Studio</p>
   </footer>
 </body>
 </html>

@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gamora Odyssey | Action RPG Portal</title>
+  <title>Neon District | Open-World Crime Action</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&family=Manrope:wght@500;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;500;600;700;800&family=Manrope:wght@500;700&display=swap"
     rel="stylesheet"
   />
   <link rel="stylesheet" href="styles.css" />
@@ -16,12 +16,28 @@
 <body data-page="home">
   <div class="atmo-layer"></div>
 
+  <div class="opening-gate" data-opening-gate>
+    <div class="opening-gate-stage"></div>
+    <div class="opening-gate-core">
+      <p class="kicker">Boot Sequence</p>
+      <h1>Neon District</h1>
+      <p>
+        The city is live. Build your crew, run high-risk jobs, and take over the map one district at a time.
+      </p>
+      <div class="opening-actions">
+        <button type="button" class="btn btn-primary" data-opening-enter>Enter The Streets</button>
+        <button type="button" class="btn btn-ghost" data-opening-skip>Skip Intro</button>
+      </div>
+      <small>Press Enter To Start</small>
+    </div>
+  </div>
+
   <header class="site-header">
     <a href="index.html" class="brand">
       <span class="brand-mark">GO</span>
       <span class="brand-text">
-        <strong>Gamora Odyssey</strong>
-        <small>Action RPG Command Center</small>
+        <strong>Neon District</strong>
+        <small>Open-World Crime Action Hub</small>
       </span>
     </a>
 
@@ -29,169 +45,361 @@
 
     <nav class="site-nav" data-nav>
       <a href="index.html" data-page-link="home">Home</a>
-      <a href="startgame.html" data-page-link="characters">Operatives</a>
-      <a href="event_calender.html" data-page-link="events">Event Radar</a>
-      <a href="community.html" data-page-link="community">Community</a>
+      <a href="startgame.html" data-page-link="characters">Crew</a>
+      <a href="event_calender.html" data-page-link="events">City Events</a>
+      <a href="community.html" data-page-link="community">Social Club</a>
     </nav>
   </header>
 
-  <main class="page page-home">
-    <section class="panel hero" data-parallax-zone data-reveal>
-      <div class="hero-copy">
-        <p class="kicker">Version 4.2 | Skyforge Eclipse</p>
-        <h1>Build your dream squad and conquer the seven realms.</h1>
-        <p class="intro-text">
-          Explore story missions, rotating events, and strategic team synergies in a cinematic anime-style RPG portal inspired by big live-service game hubs.
+  <main class="page page-home page-home-cinematic">
+    <section class="panel cinematic-hero" data-reveal data-parallax-zone>
+      <div class="cinematic-stage" data-cinematic-stage>
+        <article class="hero-slide is-active" data-hero-slide style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1800&q=80');"></article>
+        <article class="hero-slide" data-hero-slide style="background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?auto=format&fit=crop&w=1800&q=80');"></article>
+        <article class="hero-slide" data-hero-slide style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=1800&q=80');"></article>
+      </div>
+
+      <div class="hero-content">
+        <p class="kicker">Season 2 | Midnight Takeover</p>
+        <h1>Own the streets, run the heists, build your empire.</h1>
+        <p class="hero-lead">
+          Dive into a modern open-world crime sandbox packed with mission chains, car culture, city events, and online crew warfare.
         </p>
 
-        <div class="cta-row">
-          <a class="btn btn-primary" href="startgame.html">Enter Character Lab</a>
-          <a class="btn btn-ghost" href="event_calender.html">Open Event Radar</a>
-          <a class="btn btn-ghost" href="community.html">Visit Community Hub</a>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="startgame.html">Open Crew Garage</a>
+          <a class="btn btn-ghost" href="event_calender.html">See City Jobs</a>
+          <a class="btn btn-ghost" href="community.html">Join Social Club</a>
         </div>
 
-        <div class="stat-grid">
-          <article class="stat-card">
-            <h3>8.2M</h3>
-            <p>Monthly Active Travelers</p>
-          </article>
-          <article class="stat-card">
-            <h3>140+</h3>
-            <p>Weapons and Relics</p>
-          </article>
-          <article class="stat-card">
-            <h3>32</h3>
-            <p>Featured Story Chapters</p>
-          </article>
+        <div class="hero-indicators">
+          <button type="button" class="is-active" data-hero-dot="0">Downtown Core</button>
+          <button type="button" data-hero-dot="1">Vice Harbor</button>
+          <button type="button" data-hero-dot="2">Neon Hills</button>
+        </div>
+
+        <div class="live-feed">
+          <span class="live-dot" aria-hidden="true"></span>
+          <p data-live-feed-text>Live Feed: Fresh armored convoy job goes live in 02h 13m.</p>
         </div>
       </div>
 
-      <div class="hero-art">
-        <div class="energy-orb" data-depth="8"></div>
-        <img
-          src="https://images.unsplash.com/photo-1624344965190-8a1f6f6d2f2f?auto=format&fit=crop&w=880&q=80"
-          alt="Fantasy warrior illustration"
-          data-depth="18"
-        />
-      </div>
-    </section>
-
-    <section class="panel carousel-panel" data-reveal>
-      <div class="section-head">
-        <h2>Broadcast Console</h2>
-        <div class="carousel-controls">
-          <button type="button" data-carousel-prev aria-label="Previous update">Prev</button>
-          <button type="button" data-carousel-next aria-label="Next update">Next</button>
-        </div>
-      </div>
-
-      <div class="carousel-window">
-        <div class="carousel-track" data-carousel-track>
-          <article class="news-card">
-            <p class="label">New Region</p>
-            <h3>Tempest Peaks expansion opens airborne combat routes.</h3>
-            <p>Unlock vertical traversal relics and elite sky beasts.</p>
-          </article>
-          <article class="news-card">
-            <p class="label">Co-op Raid</p>
-            <h3>Leviathan Core raid now supports 8-player tactical teams.</h3>
-            <p>Shared shield mechanics and rotating elemental hazards.</p>
-          </article>
-          <article class="news-card">
-            <p class="label">Limited Banner</p>
-            <h3>Lyra Stormveil and Kairo Embermace rate-up event is live.</h3>
-            <p>Boosted drop rates and bonus fate tickets in week one.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="panel realm-panel" data-reveal>
-      <div class="section-head">
-        <h2>Realm Expedition Board</h2>
-      </div>
-
-      <div class="realm-grid">
-        <article class="realm-card">
-          <h3>Verdant Hollow</h3>
-          <p>Bio-luminescent forests with stealth-focused elite mobs.</p>
-          <div class="progress-meter"><span style="width: 74%"></span></div>
-          <small>Exploration: 74%</small>
+      <div class="hero-quick-stats">
+        <article class="quick-stat">
+          <p>Active Players</p>
+          <h3>5.8M</h3>
         </article>
-        <article class="realm-card">
-          <h3>Ashen Dominion</h3>
-          <p>Volcanic siege fields featuring heat gauge combat modifiers.</p>
-          <div class="progress-meter"><span style="width: 61%"></span></div>
-          <small>Exploration: 61%</small>
+        <article class="quick-stat">
+          <p>Weekly Heists</p>
+          <h3>1.2M</h3>
         </article>
-        <article class="realm-card">
-          <h3>Frostspire Belt</h3>
-          <p>Ice canyon puzzle chains and cryo resonance world events.</p>
-          <div class="progress-meter"><span style="width: 49%"></span></div>
-          <small>Exploration: 49%</small>
+        <article class="quick-stat">
+          <p>Online Crews</p>
+          <h3>48K</h3>
         </article>
       </div>
     </section>
 
-    <section class="panel commission-panel" data-reveal>
+    <section class="panel game-modes" data-reveal>
       <div class="section-head">
-        <h2>Daily Commission Tracker</h2>
-        <small>Progress is saved locally on your browser.</small>
+        <h2>Game Mode Gateway</h2>
+        <small>Choose how you run the city tonight.</small>
       </div>
 
-      <ul class="commission-list" data-commission-list>
-        <li>
-          <label><input type="checkbox" data-commission="shards" /> Collect 6 starlit shards</label>
-        </li>
-        <li>
-          <label><input type="checkbox" data-commission="elite" /> Defeat 2 elite encounters</label>
-        </li>
-        <li>
-          <label><input type="checkbox" data-commission="domain" /> Clear 1 tactical domain</label>
-        </li>
-        <li>
-          <label><input type="checkbox" data-commission="craft" /> Craft 3 enhancement draughts</label>
-        </li>
-      </ul>
+      <div class="mode-grid">
+        <button
+          class="mode-card is-active"
+          type="button"
+          data-mode-card
+          data-mode-title="Story Run"
+          data-mode-desc="Play campaign missions, power shifts, and high-stakes city arcs."
+        >
+          <h3>Story Run</h3>
+          <p>Cinematic missions and narrative city takeover arcs.</p>
+        </button>
 
-      <div class="commission-progress">
-        <p data-commission-text>0/4 complete</p>
-        <div class="progress-meter"><span data-commission-bar style="width: 0%"></span></div>
+        <button
+          class="mode-card"
+          type="button"
+          data-mode-card
+          data-mode-title="Heist Ops"
+          data-mode-desc="Coordinate precision robberies with role-based objectives and escape routes."
+        >
+          <h3>Heist Ops</h3>
+          <p>Multi-phase robberies for high-risk, high-reward crews.</p>
+        </button>
+
+        <button
+          class="mode-card"
+          type="button"
+          data-mode-card
+          data-mode-title="Street Races"
+          data-mode-desc="Climb speed leaderboards in illegal midnight races across the city."
+        >
+          <h3>Street Races</h3>
+          <p>Tune rides, dominate circuits, and own underground rankings.</p>
+        </button>
+
+        <button
+          class="mode-card"
+          type="button"
+          data-mode-card
+          data-mode-title="Online Freemode"
+          data-mode-desc="Free roam, launch side hustles, and create chaos with your crew."
+        >
+          <h3>Online Freemode</h3>
+          <p>Social play, turf fights, and dynamic open-world encounters.</p>
+        </button>
+      </div>
+
+      <p class="mode-hint" data-mode-hint>
+        Story Run: Play campaign missions, power shifts, and high-stakes city arcs.
+      </p>
+    </section>
+
+    <section class="panel character-premiere" data-reveal>
+      <div class="section-head">
+        <h2>Featured Crew Members</h2>
+        <small>Switch spotlight to preview role, reputation, and style.</small>
+      </div>
+
+      <div class="character-premiere-layout">
+        <article class="premiere-spotlight" data-parallax-zone>
+          <div class="premiere-portrait">
+            <img
+              src="https://images.unsplash.com/photo-1618331835717-801e976710b2?auto=format&fit=crop&w=900&q=80"
+              alt="Featured crew portrait"
+              data-home-char-image
+              data-depth="16"
+            />
+          </div>
+          <div class="premiere-meta">
+            <p class="kicker" data-home-char-role>Wheelman Specialist</p>
+            <h3 data-home-char-name>Rico Vega</h3>
+            <p data-home-char-lore>
+              An elite getaway driver known for impossible escapes through downtown checkpoints.
+            </p>
+            <div class="chip-row" data-home-char-elements></div>
+          </div>
+        </article>
+
+        <div class="premiere-selector-list">
+          <button
+            class="home-char-card is-active"
+            type="button"
+            data-char-name="Rico Vega"
+            data-char-role="Wheelman Specialist"
+            data-char-lore="An elite getaway driver known for impossible escapes through downtown checkpoints."
+            data-char-image="https://images.unsplash.com/photo-1618331835717-801e976710b2?auto=format&fit=crop&w=900&q=80"
+            data-char-elements="Driver|S-Class|Getaway Expert"
+          >
+            <strong>Rico Vega</strong>
+            <span>Precision wheelman with heat-evasion mastery.</span>
+          </button>
+
+          <button
+            class="home-char-card"
+            type="button"
+            data-char-name="Lena Cruz"
+            data-char-role="Operations Planner"
+            data-char-lore="A tactical mastermind who scripts flawless heist routes and fallback plans."
+            data-char-image="https://images.unsplash.com/photo-1519340333755-c1aa5571fd46?auto=format&fit=crop&w=900&q=80"
+            data-char-elements="Hacker|S-Class|Mission Control"
+          >
+            <strong>Lena Cruz</strong>
+            <span>Mission control and high-level heist strategist.</span>
+          </button>
+
+          <button
+            class="home-char-card"
+            type="button"
+            data-char-name="Marcus Kane"
+            data-char-role="Heavy Enforcer"
+            data-char-lore="A fearless muscle unit who handles front-line pressure and armored targets."
+            data-char-image="https://images.unsplash.com/photo-1542204625-de293a7b18d3?auto=format&fit=crop&w=900&q=80"
+            data-char-elements="Muscle|A-Class|Frontline"
+          >
+            <strong>Marcus Kane</strong>
+            <span>Direct pressure specialist for high-conflict jobs.</span>
+          </button>
+
+          <button
+            class="home-char-card"
+            type="button"
+            data-char-name="Zara Quinn"
+            data-char-role="Street Scout"
+            data-char-lore="A stealth scout with deep neighborhood intel and rapid infiltration routes."
+            data-char-image="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?auto=format&fit=crop&w=900&q=80"
+            data-char-elements="Scout|A-Class|Intel Runner"
+          >
+            <strong>Zara Quinn</strong>
+            <span>Stealth recon specialist and pursuit disruptor.</span>
+          </button>
+        </div>
       </div>
     </section>
 
-    <section class="panel home-community-panel" data-reveal>
+    <section class="panel news-command" data-reveal>
       <div class="section-head">
-        <h2>Community Pulse</h2>
-        <small>Live social activity from the Gamora player base.</small>
+        <h2>City Newswire</h2>
+        <small>Everything crews need before they log in.</small>
       </div>
 
-      <div class="community-pulse-grid">
-        <article class="pulse-card">
-          <p class="kicker">Server Status</p>
-          <h3><span class="status-badge status-online" data-server-status-badge>Online</span></h3>
-          <p><strong data-online-count>0</strong> players currently in co-op queues.</p>
-        </article>
+      <div class="news-tab-row">
+        <button type="button" class="is-active" data-news-tab-button="updates">Updates</button>
+        <button type="button" data-news-tab-button="events">City Jobs</button>
+        <button type="button" data-news-tab-button="media">Trailers</button>
+      </div>
 
-        <article class="pulse-card">
-          <p class="kicker">Looking For Group</p>
-          <h3 data-lfg-count>0</h3>
-          <p>Open squads recruiting for raids, events, and challenge clears.</p>
+      <div class="news-pane is-active" data-news-pane="updates">
+        <article class="news-item">
+          <p class="kicker">Patch Notes</p>
+          <h3>Season 2 adds dynamic police heat and adaptive pursuit AI.</h3>
+          <p>Vehicle handling, weapon balance, and urban event routing were updated globally.</p>
         </article>
+        <article class="news-item">
+          <p class="kicker">Quality Of Life</p>
+          <h3>Crew loadout presets and garage quick-switch are now live.</h3>
+          <p>Players can save three full mission presets per crew member.</p>
+        </article>
+      </div>
 
-        <article class="pulse-card">
-          <p class="kicker">This Week</p>
-          <h3>Creator Community Night</h3>
-          <p>Join live runs, coach sessions, and fan wall highlights.</p>
-          <a class="btn btn-primary" href="community.html">Enter Community Hub</a>
+      <div class="news-pane" data-news-pane="events">
+        <article class="news-item">
+          <p class="kicker">Live Job</p>
+          <h3>Harbor Convoy Intercept is now open with crew leaderboard rankings.</h3>
+          <p>Earn cash stacks, custom wraps, and rare weapon crate keys.</p>
         </article>
+        <article class="news-item">
+          <p class="kicker">Coming Soon</p>
+          <h3>Midnight Bank Breakout launches next week with multi-phase escapes.</h3>
+          <p>Coordinate driver, gunner, hacker, and spotter roles for clean execution.</p>
+        </article>
+      </div>
+
+      <div class="news-pane" data-news-pane="media">
+        <article class="news-item">
+          <p class="kicker">Trailer Drop</p>
+          <h3>Official Neon Nights trailer premieres this Saturday.</h3>
+          <p>See new districts, ride physics upgrades, and cinematic mission reveals.</p>
+        </article>
+        <article class="news-item">
+          <p class="kicker">Developer Stream</p>
+          <h3>Roadmap stream covers upcoming heists, races, and social club tools.</h3>
+          <p>Tune in for first looks at next season content and event timelines.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel realm-atlas" data-reveal>
+      <div class="section-head">
+        <h2>City Districts</h2>
+        <small>Select a district to inspect control, heat, and opportunity.</small>
+      </div>
+
+      <div class="atlas-layout">
+        <div class="atlas-region-list">
+          <button
+            class="region-node is-active"
+            type="button"
+            data-region-node
+            data-region-name="Downtown Core"
+            data-region-desc="Financial towers, armored convoys, and high-heat patrol lanes built for precision crews."
+            data-region-progress="72"
+            data-region-threat="Tactical Response Unit"
+            data-region-focus="Heists|Getaways|High Heat"
+          >
+            Downtown Core
+          </button>
+
+          <button
+            class="region-node"
+            type="button"
+            data-region-node
+            data-region-name="Vice Harbor"
+            data-region-desc="Dockyard smuggling lanes and container mazes where stealth and speed are everything."
+            data-region-progress="59"
+            data-region-threat="Harbor Task Force"
+            data-region-focus="Smuggling|Stealth Routes|Convoy Hits"
+          >
+            Vice Harbor
+          </button>
+
+          <button
+            class="region-node"
+            type="button"
+            data-region-node
+            data-region-name="Neon Hills"
+            data-region-desc="Luxury districts with street races, hidden garages, and elite security response levels."
+            data-region-progress="48"
+            data-region-threat="Private Security Grid"
+            data-region-focus="Races|Garage Unlocks|Night Events"
+          >
+            Neon Hills
+          </button>
+
+          <button
+            class="region-node"
+            type="button"
+            data-region-node
+            data-region-name="Redline Industrial"
+            data-region-desc="Factory yards and rail corridors packed with black-market runs and ambush contracts."
+            data-region-progress="34"
+            data-region-threat="Armored Syndicate"
+            data-region-focus="Ambush Jobs|Crew Warfare|Resource Routes"
+          >
+            Redline Industrial
+          </button>
+        </div>
+
+        <article class="atlas-spotlight">
+          <p class="kicker">District Briefing</p>
+          <h3 data-region-name-display>Downtown Core</h3>
+          <p data-region-desc-display>
+            Financial towers, armored convoys, and high-heat patrol lanes built for precision crews.
+          </p>
+
+          <div class="atlas-stat-grid">
+            <p>District Control: <strong data-region-progress-display>72%</strong></p>
+            <p>Primary Threat: <strong data-region-threat-display>Tactical Response Unit</strong></p>
+          </div>
+
+          <div class="progress-meter atlas-progress">
+            <span data-region-progress-bar style="width: 72%"></span>
+          </div>
+
+          <div class="chip-row" data-region-tags></div>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="event_calender.html">View Active Jobs</a>
+            <a class="btn btn-ghost" href="community.html">Find Online Crew</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel home-download-hub" data-reveal>
+      <div class="section-head">
+        <h2>Ready To Hit The Streets?</h2>
+        <small>Play across devices and keep your criminal empire synced.</small>
+      </div>
+
+      <p class="intro-text">
+        Install on your platform, log in once, and continue your run from desktop or console.
+      </p>
+
+      <div class="platform-row">
+        <a class="platform-button" href="#" aria-label="PC Download">PC</a>
+        <a class="platform-button" href="#" aria-label="PlayStation 5 Download">PS5</a>
+        <a class="platform-button" href="#" aria-label="Xbox Series Download">Xbox Series</a>
+        <a class="platform-button" href="#" aria-label="Cloud Play">Cloud Play</a>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>Gamora Odyssey portal | Real-time hub for roster, events, and strategy planning.</p>
-    <p>Copyright <span data-year></span> Gamora Interactive</p>
+    <p>Neon District portal | Real-time hub for crews, jobs, and social club strategy.</p>
+    <p>Copyright <span data-year></span> Neon District Studio</p>
   </footer>
 </body>
 </html>
