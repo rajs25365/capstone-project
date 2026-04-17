@@ -1,375 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Event Calendar - Version "Luna II"</title>
-<style>
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to top, #3a2b5a 0%, #0b1034 80%);
-    color: #fff3ce;
-    line-height: 1.5;
-  }
-
-  .container {
-    max-width: 1180px;
-    margin: 2rem auto;
-    background: #f4e2a4;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    padding: 1.5rem;
-    position: relative;
-  }
-
-  header {
-    text-align: center;
-    margin-bottom: 1rem;
-    color: #7b5527;
-    font-weight: 700;
-    font-size: 1.5rem;
-    font-family: 'Merriweather', serif;
-    letter-spacing: 0.04em;
-    position: relative;
-  }
-  header .icon {
-    font-size: 2rem;
-    margin-right: 0.25rem;
-    color: #d9a607;
-  }
-
-  .version-label {
-    text-align: center;
-    font-weight: 700;
-    color: #a27a3c;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    font-family: 'Georgia', serif;
-  }
-
-  nav.sidebar {
-    position: fixed;
-    top: 50%;
-    left: 1rem;
-    background: transparent;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    font-weight: 600;
-  }
-  nav.sidebar a {
-    color: #fff3ce;
-    text-decoration: none;
-    font-size: 1rem;
-    transition: color 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    cursor: pointer;
-  }
-  nav.sidebar a:hover,
-  nav.sidebar a.active {
-    color: #ffd95b;
-  }
-  nav.sidebar a .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #fff3ce;
-  }
-  nav.sidebar a.active .dot {
-    background: #ffd95b;
-    box-shadow: 0 0 6px #ffd95b;
-  }
-
-  table.event-calendar {
-    width: 100%;
-    border-collapse: collapse;
-    background: #fffbea88;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: inset 0 0 25px #e0c98e88;
-  }
-  thead tr {
-    background: #d0b867;
-  }
-  thead th {
-    font-weight: 700;
-    padding: 0.75rem 1rem;
-    text-align: left;
-    border-bottom: 2px solid #a48851;
-    color: #453305;
-    font-size: 1.1rem;
-  }
-  tbody td {
-    padding: 0.6rem 1rem;
-    border-bottom: 1px solid #e9dca3;
-    vertical-align: top;
-    color: #453305;
-    font-size: 0.9rem;
-  }
-  tbody tr:last-child td {
-    border-bottom: none;
-  }
-
-  .event {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    background: #fdf6d8d9;
-    border-radius: 6px;
-    padding: 0.3rem 0.75rem;
-    margin: 0.25rem 0;
-    box-shadow: 1px 1px 6px #c2aa6a;
-    font-weight: 600;
-    color: #5a4822;
-  }
-  .event-img {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background-position: center;
-    background-size: cover;
-    flex-shrink: 0;
-    border: 1px solid #ae8d39;
-  }
-  .icon-primo {
-    width: 24px;
-    height: 24px;
-    background: url('https://static.wikia.nocookie.net/gensin-impact/images/6/6f/Icon_Primogem.png') no-repeat center/contain;
-  }
-  .btn-go {
-    background: #de9220;
-    border: none;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 0 8px #b37a19;
-    transition: background 0.3s ease;
-  }
-  .btn-go:hover {
-    background: #c07a1a;
-  }
-  .label-up {
-    background: #d04a2a;
-    color: white;
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 0 6px;
-    border-radius: 3px;
-    margin-right: 0.35rem;
-  }
-  .web-event {
-    background: #739766;
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 2px 6px;
-    border-radius: 3px;
-    margin-left: auto;
-  }
-
-  .dates-header {
-    background: #d6bc79cc;
-    color: #5a4822;
-    font-weight: 700;
-    font-size: 0.85rem;
-    padding: 0.5rem 1rem;
-  }
-
-  footer {
-    background: #7f5f2f;
-    color: #fff2a0;
-    font-weight: 600;
-    text-align: center;
-    padding: 1rem;
-    border-radius: 0 0 12px 12px;
-    font-family: 'Georgia', serif;
-    font-size: 1rem;
-  }
-  .download-btn {
-    background: #c08e29;
-    border: none;
-    border-radius: 20px;
-    padding: 0.5rem 2rem;
-    font-weight: 700;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    margin-left: 1rem;
-    box-shadow: 0 0 12px #b0831a;
-  }
-  .download-btn:hover {
-    background: #a46f14;
-  }
-
-  @media (max-width: 1024px) {
-    nav.sidebar {
-      position: static;
-      flex-direction: row;
-      justify-content: center;
-      gap: 2rem;
-      margin-bottom: 1rem;
-    }
-    .container {
-      margin-top: 5rem;
-      padding: 1rem;
-    }
-  }
-  @media (max-width: 600px) {
-    table.event-calendar, thead, tbody, th, td, tr {
-      display: block;
-    }
-    thead tr {
-      display: none;
-    }
-    tbody td {
-      border: none;
-      padding: 1rem 0;
-      position: relative;
-      padding-left: 50%;
-      text-align: left;
-      background: #fffdfa99;
-      margin-bottom: 0.8rem;
-      border-radius: 10px;
-      color: #5a4822;
-    }
-    tbody td::before {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      width: 45%;
-      white-space: nowrap;
-      font-weight: 700;
-      content: attr(data-label);
-      color: #896f22;
-    }
-    .event {
-      flex-wrap: wrap;
-    }
-    .btn-go {
-      margin-top: 0.5rem;
-    }
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gamora Odyssey | Event Radar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&family=Manrope:wght@500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js" defer></script>
 </head>
-<body>
+<body data-page="events">
+  <div class="atmo-layer"></div>
 
-<nav class="sidebar" aria-label="Main Navigation">
-  <a href="index.html" class="active"><span class="dot"></span> Home</a>
-  <a href="startgame.html" class="active"><span class="dot"></span> Character</a>
-  
-  <a href="#" class="active"><span class="dot"></span> Event Calendar</a>
-</nav>
+  <header class="site-header">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">GO</span>
+      <span class="brand-text">
+        <strong>Gamora Odyssey</strong>
+        <small>Action RPG Command Center</small>
+      </span>
+    </a>
 
-<div class="container" role="main" aria-labelledby="calendarTitle">
+    <button class="menu-toggle" type="button" data-menu-toggle aria-label="Toggle navigation">Menu</button>
 
-  <header id="calendarTitle" aria-label="Event Calendar Header">
-    <span class="icon">✨</span> Event Calendar
+    <nav class="site-nav" data-nav>
+      <a href="index.html" data-page-link="home">Home</a>
+      <a href="startgame.html" data-page-link="characters">Operatives</a>
+      <a href="event_calender.html" data-page-link="events">Event Radar</a>
+    </nav>
   </header>
 
-  <div class="version-label" aria-live="polite">
-    Version "Luna II" Event Calendar
-  </div>
+  <main class="page page-events">
+    <section class="panel events-hero" data-reveal>
+      <div>
+        <p class="kicker">Live-Service Mission Board</p>
+        <h1>Track every event window before it expires.</h1>
+        <p class="intro-text">
+          This radar tracks active, upcoming, and finished activities so your resin, pulls, and weekly targets stay optimized.
+        </p>
+      </div>
 
-  <table class="event-calendar" role="grid" aria-describedby="calendarDesc">
-    <caption id="calendarDesc" class="sr-only">
-      Event calendar displaying multiple version and permanent events for October and November.
-    </caption>
-    <thead>
-      <tr>
-        <th scope="col" style="width:20%;">October</th>
-        <th scope="col" style="width:20%;">November</th>
-        <th scope="col" style="width:60%;">Event Details</th>
-      </tr>
-    </thead>
-    <tbody>
+      <div class="metrics-grid">
+        <article class="stat-card">
+          <h3 data-live-count>0</h3>
+          <p>Live Events</p>
+        </article>
+        <article class="stat-card">
+          <h3 data-upcoming-count>0</h3>
+          <p>Upcoming Events</p>
+        </article>
+        <article class="stat-card">
+          <h3 data-ended-count>0</h3>
+          <p>Archived Events</p>
+        </article>
+      </div>
+    </section>
 
-      <tr>
-        <td data-label="October Date" aria-sort="ascending">10/10</td>
-        <td data-label="November Date"></td>
-        <td data-label="Event Details">
-          <div class="event">
-            <div class="event-img" style="background-image:url('https://static.wikia.nocookie.net/gensin-impact/images/1/11/Venti_Icon.png');" aria-hidden="true" title="Character Venti"></div>
-            <div>
-              <div><strong>Version "Luna II" Special Program</strong></div>
-              <div>"Temptation of the Crimson Sands" Begins</div>
-            </div>
-            <button class="btn-go" aria-label="Go to event details">GO</button>
+    <section class="panel event-panel" data-reveal>
+      <div class="section-head">
+        <h2>Mission Timeline</h2>
+        <div class="filter-row" data-event-filters>
+          <button class="active" type="button" data-event-filter="all">All</button>
+          <button type="button" data-event-filter="live">Live</button>
+          <button type="button" data-event-filter="upcoming">Upcoming</button>
+          <button type="button" data-event-filter="ended">Ended</button>
+          <button type="button" data-event-filter="combat">Combat</button>
+          <button type="button" data-event-filter="story">Story</button>
+          <button type="button" data-event-filter="web">Web</button>
+        </div>
+      </div>
+
+      <div class="event-grid">
+        <article
+          class="event-card"
+          data-event-type="combat"
+          data-start="2026-04-12T05:00:00Z"
+          data-end="2026-04-27T04:59:00Z"
+        >
+          <header>
+            <h3>Crimson Gauntlet Protocol</h3>
+            <span class="status-pill" data-status-text>Loading</span>
+          </header>
+          <p>Sequential elite challenge floors with adaptive enemy modifiers.</p>
+          <p class="countdown" data-countdown>Syncing timeline...</p>
+          <div class="progress-meter"><span data-progress></span></div>
+          <div class="reward-line">
+            <span>420 Stellar Gems</span>
+            <span>Weapon Mold x1</span>
           </div>
-        </td>
-      </tr>
+        </article>
 
-      <tr>
-        <td data-label="October Date">10/22</td>
-        <td data-label="November Date"></td>
-        <td data-label="Event Details">
-          <div class="event">
-            <span class="icon-primo" title="Primogem icon" aria-hidden="true"></span>
-            <div>Version "Luna II" update</div>
+        <article
+          class="event-card"
+          data-event-type="story"
+          data-start="2026-04-16T05:00:00Z"
+          data-end="2026-05-03T04:59:00Z"
+        >
+          <header>
+            <h3>Echoes of the Hollow Moon</h3>
+            <span class="status-pill" data-status-text>Loading</span>
+          </header>
+          <p>Narrative investigation arc with multi-ending branch outcomes.</p>
+          <p class="countdown" data-countdown>Syncing timeline...</p>
+          <div class="progress-meter"><span data-progress></span></div>
+          <div class="reward-line">
+            <span>360 Stellar Gems</span>
+            <span>Resonance Relic</span>
           </div>
-        </td>
-      </tr>
+        </article>
 
-      <tr>
-        <td data-label="October Date">10/10 - 10/21</td>
-        <td data-label="November Date"></td>
-        <td data-label="Event Details">
-          <div class="event">
-            <div class="event-img" style="background-image:url('https://static.wikia.nocookie.net/gensin-impact/images/4/45/Starbound_Oath_Icon.png');" title="Starbound Oath" aria-hidden="true"></div>
-            <span class="icon-primo" aria-hidden="true"></span> x40
-            <span class="web-event" aria-label="Web Event">Web Event</span>
-            Starbound Oath
-            <button class="btn-go" aria-label="Go to Starbound Oath details">GO</button>
+        <article
+          class="event-card"
+          data-event-type="web"
+          data-start="2026-04-20T05:00:00Z"
+          data-end="2026-04-29T04:59:00Z"
+        >
+          <header>
+            <h3>Navigator Mini App</h3>
+            <span class="status-pill" data-status-text>Loading</span>
+          </header>
+          <p>Browser event with puzzle routing and daily check-in rewards.</p>
+          <p class="countdown" data-countdown>Syncing timeline...</p>
+          <div class="progress-meter"><span data-progress></span></div>
+          <div class="reward-line">
+            <span>200 Stellar Gems</span>
+            <span>3 Fate Tickets</span>
           </div>
-        </td>
-      </tr>
+        </article>
 
-      <tr>
-        <td data-label="October Date">10/24 - 11/03</td>
-        <td data-label="November Date"></td>
-        <td data-label="Event Details">
-          <div class="event">
-            <span class="icon-primo" aria-hidden="true"></span> x420
-            Saurian Sojourn
+        <article
+          class="event-card"
+          data-event-type="combat"
+          data-start="2026-03-30T05:00:00Z"
+          data-end="2026-04-11T04:59:00Z"
+        >
+          <header>
+            <h3>Frostline Survival Trial</h3>
+            <span class="status-pill" data-status-text>Loading</span>
+          </header>
+          <p>Temperature-control challenge with shifting blizzard zones.</p>
+          <p class="countdown" data-countdown>Syncing timeline...</p>
+          <div class="progress-meter"><span data-progress></span></div>
+          <div class="reward-line">
+            <span>280 Stellar Gems</span>
+            <span>Ore Cache x12</span>
           </div>
-        </td>
-      </tr>
+        </article>
 
+        <article
+          class="event-card"
+          data-event-type="story"
+          data-start="2026-05-01T05:00:00Z"
+          data-end="2026-05-22T04:59:00Z"
+        >
+          <header>
+            <h3>Siege of Lumen Harbor</h3>
+            <span class="status-pill" data-status-text>Loading</span>
+          </header>
+          <p>Faction alliance chapter introducing a new 5-star operative.</p>
+          <p class="countdown" data-countdown>Syncing timeline...</p>
+          <div class="progress-meter"><span data-progress></span></div>
+          <div class="reward-line">
+            <span>520 Stellar Gems</span>
+            <span>Limited Namecard</span>
+          </div>
+        </article>
 
-      <tr>
-        <td data-label="October Date">09/10 - 12/01</td>
-        <td data-label="November Date"></td>
-        <td data-label="Event Details" style="background:#dae6afcc; font-weight: 700;">
-          To Temper Thyself and Journey Far
-          <button class="btn-go" aria-label="Go to event details">GO</button>
-        </td>
-      </tr>
+        <article
+          class="event-card"
+          data-event-type="web"
+          data-start="2026-04-08T05:00:00Z"
+          data-end="2026-04-25T04:59:00Z"
+        >
+          <header>
+            <h3>Strategist Dispatch Board</h3>
+            <span class="status-pill" data-status-text>Loading</span>
+          </header>
+          <p>Time-gated dispatch planner with account-wide expedition perks.</p>
+          <p class="countdown" data-countdown>Syncing timeline...</p>
+          <div class="progress-meter"><span data-progress></span></div>
+          <div class="reward-line">
+            <span>260 Stellar Gems</span>
+            <span>Talent Kit x6</span>
+          </div>
+        </article>
+      </div>
+    </section>
 
-      <tr>
-        <td colspan="3" style="background:#f4e2a422; font-style: italic; padding: 0.5rem 1rem; font-size: 0.8rem;">
-          *Please check in-game notices for event details and schedules.
-        </td>
-      </tr>
+    <section class="panel planner-panel" data-reveal>
+      <div class="section-head">
+        <h2>Gem Reward Planner</h2>
+        <small>Estimate how many gems you can farm this cycle.</small>
+      </div>
 
-    </tbody>
-  </table>
+      <label for="daysRange">Active days this cycle: <strong data-days-output>14</strong></label>
+      <input id="daysRange" type="range" min="1" max="30" value="14" data-days-slider />
 
-</div>
+      <div class="bonus-options">
+        <label><input type="checkbox" data-bonus="320" checked /> Premium pass active (+320)</label>
+        <label><input type="checkbox" data-bonus="180" /> Weekly raid clear (+180)</label>
+        <label><input type="checkbox" data-bonus="240" checked /> Spiral challenge complete (+240)</label>
+      </div>
 
-<footer>
-  <span>Genshin Impact &nbsp;|&nbsp; Song of the Welkin Moon</span>
-  <span>Take part in the Version "Luna II" event to obtain Primogems!</span>
-  <button class="download-btn" aria-label="Download PC version (HoYoPlay)">PC Download (HoYoPlay)</button>
-</footer>
+      <p class="planner-total">Estimated total gems: <strong data-gem-total>0</strong></p>
+    </section>
+  </main>
 
+  <footer class="site-footer">
+    <p>Never miss a banner window, challenge reset, or bonus payout again.</p>
+    <p>Copyright <span data-year></span> Gamora Interactive</p>
+  </footer>
 </body>
 </html>

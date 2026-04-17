@@ -1,143 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Gamora</title>
-    <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gamora Odyssey | Action RPG Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&family=Manrope:wght@500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js" defer></script>
 </head>
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Georgia', serif;
-}
+<body data-page="home">
+  <div class="atmo-layer"></div>
 
-body {
-    background-color: #081229;
-    color: #f1e9dc;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background-image: url("https://images8.alphacoders.com/134/thumb-1920-1349793.png");
-}
+  <header class="site-header">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">GO</span>
+      <span class="brand-text">
+        <strong>Gamora Odyssey</strong>
+        <small>Action RPG Command Center</small>
+      </span>
+    </a>
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 3rem;
-    background-color: #0b1836;
-    border-bottom: 1px solid #192a57;
-}
+    <button class="menu-toggle" type="button" data-menu-toggle aria-label="Toggle navigation">Menu</button>
 
-.logo {
-    font-weight: 900;
-    font-size: 1.8rem;
-    letter-spacing: 2px;
-}
+    <nav class="site-nav" data-nav>
+      <a href="index.html" data-page-link="home">Home</a>
+      <a href="startgame.html" data-page-link="characters">Operatives</a>
+      <a href="event_calender.html" data-page-link="events">Event Radar</a>
+    </nav>
+  </header>
 
-.nav {
-    display: flex;
-    gap: 2rem;
-}
+  <main class="page page-home">
+    <section class="panel hero" data-parallax-zone data-reveal>
+      <div class="hero-copy">
+        <p class="kicker">Version 4.2 | Skyforge Eclipse</p>
+        <h1>Build your dream squad and conquer the seven realms.</h1>
+        <p class="intro-text">
+          Explore story missions, rotating events, and strategic team synergies in a cinematic anime-style RPG portal inspired by big live-service game hubs.
+        </p>
 
-.nav-link {
-    color: #f1e9dc;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1.1rem;
-    transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-    color: #a9c1d9;
-    cursor: pointer;
-}
-
-.main-content {
-    flex-grow: 1;
-   
-    
-    max-width: 1200px;
-    margin:40px ;
-    padding: 0 1rem;
-    
-}
-
-.text-section {
-    max-width: 550px;
-}
-
-.text-section h1 {
-    font-size: 3.5rem;
-    font-weight: 900;
-    line-height: 1.1;
-    margin-bottom: 1rem;
-}
-
-.text-section p {
-    font-weight: 400;
-    font-size: 1.125rem;
-    margin-bottom: 2rem;
-    line-height: 1.5;
-    font-family: 'Arial', sans-serif;
-}
-
-/* Button styles */
-.start-btn {
-    background-color: transparent;
-    border: 2px solid #2e3a67;
-    color: #f1e9dc;
-    padding: 0.75rem 1.75rem;
-    font-weight: 700;
-    font-size: 1.1rem;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    font-family: 'Arial', sans-serif;
-}
-
-.start-btn:hover {
-    background-color: #2e3a67;
-    border-color: #7ea4d8;
-    color: #cbd9f2;
-}
-
-
-
-@media screen and (max-width: 900px) {
-    .main-content {
-        flex-direction: column-reverse;
-        text-align: center;
-    }
-
-    .text-section h1 {
-        font-size: 2.5rem;
-    }
-
-
-}
-
-
-</style>
-<body>
-    <header class="header">
-        <div class="logo">GAMORA</div>
-        <nav class="nav">
-            <a href="startgame.html" class="nav-link">HOME</a>
-            
-            <a href="#" class="nav-link">ABOUT</a>
-        </nav>
-    </header>
-    <main class="main-content">
-        <div class="text-section">
-            <h1>UNLEASH <br />THE GAMER <br />WITHIN</h1>
-            <p>Embark on epic quests and unleash your inner gamer in a world where adventure awaits.</p>
-            <button a href="startgame.html" class="start-btn">START GAME</button>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="startgame.html">Enter Character Lab</a>
+          <a class="btn btn-ghost" href="event_calender.html">Open Event Radar</a>
         </div>
-       
-    </main>
+
+        <div class="stat-grid">
+          <article class="stat-card">
+            <h3>8.2M</h3>
+            <p>Monthly Active Travelers</p>
+          </article>
+          <article class="stat-card">
+            <h3>140+</h3>
+            <p>Weapons and Relics</p>
+          </article>
+          <article class="stat-card">
+            <h3>32</h3>
+            <p>Featured Story Chapters</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <div class="energy-orb" data-depth="8"></div>
+        <img
+          src="https://images.unsplash.com/photo-1624344965190-8a1f6f6d2f2f?auto=format&fit=crop&w=880&q=80"
+          alt="Fantasy warrior illustration"
+          data-depth="18"
+        />
+      </div>
+    </section>
+
+    <section class="panel carousel-panel" data-reveal>
+      <div class="section-head">
+        <h2>Broadcast Console</h2>
+        <div class="carousel-controls">
+          <button type="button" data-carousel-prev aria-label="Previous update">Prev</button>
+          <button type="button" data-carousel-next aria-label="Next update">Next</button>
+        </div>
+      </div>
+
+      <div class="carousel-window">
+        <div class="carousel-track" data-carousel-track>
+          <article class="news-card">
+            <p class="label">New Region</p>
+            <h3>Tempest Peaks expansion opens airborne combat routes.</h3>
+            <p>Unlock vertical traversal relics and elite sky beasts.</p>
+          </article>
+          <article class="news-card">
+            <p class="label">Co-op Raid</p>
+            <h3>Leviathan Core raid now supports 8-player tactical teams.</h3>
+            <p>Shared shield mechanics and rotating elemental hazards.</p>
+          </article>
+          <article class="news-card">
+            <p class="label">Limited Banner</p>
+            <h3>Lyra Stormveil and Kairo Embermace rate-up event is live.</h3>
+            <p>Boosted drop rates and bonus fate tickets in week one.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel realm-panel" data-reveal>
+      <div class="section-head">
+        <h2>Realm Expedition Board</h2>
+      </div>
+
+      <div class="realm-grid">
+        <article class="realm-card">
+          <h3>Verdant Hollow</h3>
+          <p>Bio-luminescent forests with stealth-focused elite mobs.</p>
+          <div class="progress-meter"><span style="width: 74%"></span></div>
+          <small>Exploration: 74%</small>
+        </article>
+        <article class="realm-card">
+          <h3>Ashen Dominion</h3>
+          <p>Volcanic siege fields featuring heat gauge combat modifiers.</p>
+          <div class="progress-meter"><span style="width: 61%"></span></div>
+          <small>Exploration: 61%</small>
+        </article>
+        <article class="realm-card">
+          <h3>Frostspire Belt</h3>
+          <p>Ice canyon puzzle chains and cryo resonance world events.</p>
+          <div class="progress-meter"><span style="width: 49%"></span></div>
+          <small>Exploration: 49%</small>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel commission-panel" data-reveal>
+      <div class="section-head">
+        <h2>Daily Commission Tracker</h2>
+        <small>Progress is saved locally on your browser.</small>
+      </div>
+
+      <ul class="commission-list" data-commission-list>
+        <li>
+          <label><input type="checkbox" data-commission="shards" /> Collect 6 starlit shards</label>
+        </li>
+        <li>
+          <label><input type="checkbox" data-commission="elite" /> Defeat 2 elite encounters</label>
+        </li>
+        <li>
+          <label><input type="checkbox" data-commission="domain" /> Clear 1 tactical domain</label>
+        </li>
+        <li>
+          <label><input type="checkbox" data-commission="craft" /> Craft 3 enhancement draughts</label>
+        </li>
+      </ul>
+
+      <div class="commission-progress">
+        <p data-commission-text>0/4 complete</p>
+        <div class="progress-meter"><span data-commission-bar style="width: 0%"></span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Gamora Odyssey portal | Real-time hub for roster, events, and strategy planning.</p>
+    <p>Copyright <span data-year></span> Gamora Interactive</p>
+  </footer>
 </body>
 </html>

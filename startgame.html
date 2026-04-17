@@ -1,447 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Genshin Impact - Nefer</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body,
-    html {
-      margin: 0;
-      padding: 0;
-      font-family: 'Georgia', serif;
-      background: linear-gradient(135deg, #0e372e 10%, #1d5946 90%);
-      color: #d9e8c6;
-      height: 100vh;
-      overflow-x: hidden;
-    }
-
-    a {
-      color: #c6e8a8;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    a:hover {
-      color: #a6d04d;
-      text-decoration: underline;
-    }
-
-    .container {
-      display: grid;
-      grid-template-columns: 220px 1fr 360px;
-      grid-template-rows: 1fr auto;
-      height: 100vh;
-      gap: 15px;
-      padding: 15px;
-      background-image: url("https://images5.alphacoders.com/129/thumb-1920-1292433.jpg");
-    }
-
-    nav {
-      background: rgba(16, 40, 30, 0.75);
-      border-radius: 15px;
-      padding: 40px 35px;
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-      user-select: none;
-      position: relative;
-    }
-
-    nav h1 {
-      font-size: 1.85rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      letter-spacing: 1px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    nav h1::before {
-      content: '';
-      width: 0;
-      height: 0;
-      border-left: 12px solid transparent;
-      border-right: 12px solid transparent;
-      border-bottom: 18px solid #a0ca86;
-      transform: rotate(-15deg);
-      display: inline-block;
-    }
-
-    nav ul {
-      list-style: none;
-      padding-left: 0;
-      margin: 0;
-    }
-
-    nav ul li {
-      margin: 20px 0;
-      font-weight: 700;
-      font-size: 1.15rem;
-      cursor: pointer;
-      letter-spacing: 0.03rem;
-      color: #b8dcb0;
-      transition: color 0.3s ease;
-      position: relative;
-      padding-left: 24px;
-    }
-
-    nav ul li.active,
-    nav ul li:hover {
-      color: #e6f4d6;
-      font-weight: 900;
-    }
-
-    nav ul li.active::before,
-    nav ul li:hover::before {
-      content: '●';
-      position: absolute;
-      left: 0;
-      color: #93c76d;
-      font-size: 1.25rem;
-      line-height: 1;
-    }
-
-    
-    .voice-btn {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: none;
-      background: #bce0c7;
-      filter: drop-shadow(0 0 5px #a3df9f);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-      font-size: 22px;
-      color: #0d3e37;
-      user-select: none;
-      transition: background 0.3s ease;
-    }
-
-    .voice-btn:hover {
-      background: #a3df9f;
-    }
-
-    
-    .btn-view-more {
-      background: #86bb59;
-      border-radius: 30px;
-      border: none;
-      padding: 14px 40px;
-      color: #f0f9d2;
-      font-weight: 700;
-      font-size: 1.3rem;
-      cursor: pointer;
-      width: 180px;
-      filter: drop-shadow(0 0 10px #a2cc65);
-      transition: background 0.4s ease;
-      user-select: none;
-      margin-bottom: 12px;
-      text-align: center;
-    }
-
-    .btn-view-more:hover {
-      background: #a0d041;
-    }
-
-    
-    .char-desc {
-      font-size: 1.1rem;
-      letter-spacing: 0.04rem;
-      color: #cad6ba;
-      max-width: 360px;
-      line-height: 1.4;
-      font-weight: 400;
-    }
-
-    
-    main {
-      background: linear-gradient(135deg, #155a45 40%, #0e3b2f 90%);
-      border-radius: 25px;
-      padding: 45px 50px 50px 50px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      gap: 18px;
-      user-select: none;
-      position: relative;
-    }
-
-    
-    .new-label {
-      display: inline-block;
-      background: #93bf5b;
-      padding: 4px 20px;
-      font-weight: 600;
-      font-size: 1rem;
-      border-radius: 12px;
-      letter-spacing: 0.04rem;
-    }
-
-    
-    .element-icon {
-      font-size: 3.5rem;
-      color: #a6dd8c;
-      margin-bottom: 10px;
-      filter: drop-shadow(0 0 5px #80bb48);
-      user-select: none;
-      position: relative;
-      width: 40px;
-      height: 40px;
-      margin-top: 14px;
-    }
-
-    .element-icon::before {
-      content: "♣"; 
-      font-weight: bold;
-      font-size: 3.5rem;
-      color: #a6dd8c;
-      filter: drop-shadow(0 0 5px #80bb48);
-    }
-
-    
-    .char-name {
-      font-family: 'Georgia', serif;
-      font-weight: 900;
-      font-size: 4rem;
-      line-height: 1;
-      letter-spacing: 0.05rem;
-      margin: 0;
-      user-select: none;
-    }
-
-    /* Stars rating */
-    .stars {
-      margin-bottom: 25px;
-      user-select: none;
-    }
-
-    .stars span {
-      font-size: 2.4rem;
-      color: gold;
-      margin-right: 3px;
-      text-shadow: 0 0 4px #b88f00;
-    }
-
-   
-    .separator {
-      width: 140px;
-      height: 2px;
-      background: linear-gradient(to right, transparent, #739c5b, transparent);
-      margin-bottom: 30px;
-      position: relative;
-    }
-
-    .separator::after {
-      content: "◆";
-      font-size: 1.6rem;
-      color: #82b870;
-      position: absolute;
-      right: -25px;
-      top: -11px;
-      text-shadow: 0 0 6px #acc282aa;
-      user-select: none;
-    }
-
-    
-    .char-image {
-      grid-column: 3;
-      grid-row: 1 / 2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      user-select: none;
-      filter: drop-shadow(0 0 10px #8fc65a);
-    }
-
-    .char-image img {
-      max-width: 100%;
-      height: auto;
-      pointer-events: none;
-      border-radius: 12px;
-    }
-
-    
-    .right-icons {
-      position: absolute;
-      top: 160px;
-      right: 65px;
-      display: flex;
-      flex-direction: column;
-      gap: 35px;
-      user-select: none;
-      z-index: 2;
-    }
-
-    .right-icons button {
-      width: 65px;
-      height: 65px;
-      border-radius: 50%;
-      border: 2.5px solid #d0efbc;
-      background-color: #143f31;
-      box-shadow: 0 0 8px #8bbb54;
-      cursor: pointer;
-      font-size: 30px;
-      color: #b8e2a7;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .right-icons button:hover,
-    .right-icons button.active {
-      border-color: #a0d053;
-      box-shadow: 0 0 20px #a0d053;
-    }
-
-    
-    footer {
-      grid-column: 1 / 4;
-      grid-row: 2;
-      background: #193d1f;
-      border-top: 4px solid #6eae54;
-      padding: 14px 120px;
-      color: #bedda9;
-      font-family: 'Georgia', serif;
-      font-weight: 600;
-      font-size: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      user-select: none;
-    }
-
-    footer .footer-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      filter: drop-shadow(0 0 3px #8abb51);
-    }
-
-    
-    .footer-logo .logo {
-      font-weight: 900;
-      font-size: 1.5rem;
-      font-family: 'Arial Black', Arial, sans-serif;
-      color: #b3ddb4;
-      text-shadow: 0 0 5px #729a4a;
-      user-select: none;
-    }
-
-    
-    footer .footer-message {
-      flex-grow: 1;
-      text-align: center;
-      font-weight: 400;
-      font-size: 1.1rem;
-      max-width: 600px;
-      color: #c6df9f;
-      text-shadow: 0 0 5px #729a4a;
-    }
-
-    
-    .btn-download {
-      background: #569446;
-      border-radius: 30px;
-      border: none;
-      padding: 9px 32px;
-      color: #e4f3d1;
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      box-shadow: 0 0 15px #477d2f;
-      filter: drop-shadow(0 0 12px #74a44b);
-      transition: background 0.3s ease;
-      user-select: none;
-      line-height: 1.2;
-    }
-
-    .btn-download:hover {
-      background: #97c958;
-      box-shadow: 0 0 20px #9dd25e;
-      color: #26511d;
-    }
-
-    
-    @media (max-width: 1145px) {
-      .container {
-        grid-template-columns: 200px 1fr;
-        grid-template-rows: 1fr auto;
-      }
-
-      .char-image,
-      .right-icons {
-        display: none;
-      }
-
-      footer {
-        padding: 14px 30px;
-      }
-    }
-
-  </style>
+  <title>Gamora Odyssey | Operative Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&family=Manrope:wght@500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js" defer></script>
 </head>
+<body data-page="characters">
+  <div class="atmo-layer"></div>
 
-<body>
-  <div class="container">
-    
-    <nav aria-label="Website navigation">
-      <h1>Characters · Weapons</h1>
-      <a href="index.html" class="active">.HOME</a>
-      <a href="startgame.html" class="active">.Character</a>
-      <a href="event_calender.html" class="active">.Event Calender</a>
-      <button class="voice-btn" aria-label="Voice">🎤</button>
-      <button class="btn-view-more" aria-label="View More about Nefer">View More</button>
-      <p class="char-desc">
-        The remarkably resourceful owner of the Curatorium of Secrets.
-      </p>
+  <header class="site-header">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">GO</span>
+      <span class="brand-text">
+        <strong>Gamora Odyssey</strong>
+        <small>Action RPG Command Center</small>
+      </span>
+    </a>
+
+    <button class="menu-toggle" type="button" data-menu-toggle aria-label="Toggle navigation">Menu</button>
+
+    <nav class="site-nav" data-nav>
+      <a href="index.html" data-page-link="home">Home</a>
+      <a href="startgame.html" data-page-link="characters">Operatives</a>
+      <a href="event_calender.html" data-page-link="events">Event Radar</a>
     </nav>
+  </header>
 
-    
-    <main role="main" aria-label="Character details">
-      <div class="element-icon" aria-hidden="true"></div>
-      <div class="new-label">NEW</div>
-      <h2 class="char-name">Nefer</h2>
-      
-      <div class="stars" aria-label="5 star rating" role="img">
-        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-        <p>The remarkably resourceful owner of the Curatorium of Secrets.</p>
-        <img src="https://static.beebom.com/wp-content/uploads/2023/06/how-to-get-Characters-in-Genshin-Impact.png?w=750&quality=75" alt="">
+  <main class="page page-characters">
+    <section class="panel character-shell" data-reveal data-parallax-zone>
+      <div class="spotlight-copy">
+        <p class="kicker">Featured Operative</p>
+        <h1 data-character-name>Lyra Stormveil</h1>
+        <p class="spotlight-meta">
+          <span data-character-element>Aero</span>
+          <span class="dot-sep"></span>
+          <span data-character-role>Skyblade Vanguard</span>
+        </p>
+
+        <div class="star-line" data-character-stars>★★★★★</div>
+
+        <p class="spotlight-quote" data-character-quote>
+          Ride the stormline, strike first, and leave only silence.
+        </p>
+
+        <div class="ability-grid">
+          <article>
+            <h3>Skill</h3>
+            <p data-character-skill>Tempest Lance</p>
+          </article>
+          <article>
+            <h3>Burst</h3>
+            <p data-character-burst>Aurora Domain</p>
+          </article>
+        </div>
       </div>
-      <div class="separator"></div>
-    </main>
 
-    
-
-    <div class="right-icons" aria-label="Character actions">
-      <button title="Profile" aria-pressed="false">👤</button>
-      <button title="Weapon" aria-pressed="true" class="active">⚔️</button>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-      <div class="footer-logo" aria-label="Genshin Impact logo">
-        <span class="logo">GENSHIN</span>
-        <span>Song of the Welkin Moon</span>
+      <div class="spotlight-art">
+        <img
+          data-character-image
+          src="https://images.unsplash.com/photo-1618331835717-801e976710b2?auto=format&fit=crop&w=880&q=80"
+          alt="Featured fantasy operative"
+          data-depth="16"
+        />
       </div>
-      <div class="footer-message" role="note" aria-live="polite">
-        Take part in the Version "Luna II" event to obtain Primogems!
+    </section>
+
+    <section class="panel roster-panel" data-reveal>
+      <div class="section-head">
+        <h2>Operative Roster</h2>
+        <div class="filter-row" data-filter-group>
+          <button type="button" class="active" data-filter="all">All</button>
+          <button type="button" data-filter="aero">Aero</button>
+          <button type="button" data-filter="ember">Ember</button>
+          <button type="button" data-filter="tide">Tide</button>
+          <button type="button" data-filter="terra">Terra</button>
+          <button type="button" data-filter="volt">Volt</button>
+        </div>
       </div>
-      <button class="btn-download" aria-label="Download Genshin Impact for PC">
-        PC Download<br /><small>(HoYoPlay)</small>
-      </button>
-    </footer>
-  </div>
+
+      <div class="roster-grid">
+        <article
+          class="roster-card active"
+          tabindex="0"
+          data-element="aero"
+          data-name="Lyra Stormveil"
+          data-role="Skyblade Vanguard"
+          data-rarity="5"
+          data-quote="Ride the stormline, strike first, and leave only silence."
+          data-image="https://images.unsplash.com/photo-1618331835717-801e976710b2?auto=format&fit=crop&w=880&q=80"
+          data-skill="Tempest Lance"
+          data-burst="Aurora Domain"
+        >
+          <h3>Lyra Stormveil</h3>
+          <p>Aero | Skyblade Vanguard</p>
+        </article>
+
+        <article
+          class="roster-card"
+          tabindex="0"
+          data-element="ember"
+          data-name="Kairo Embermace"
+          data-role="Frontline Breaker"
+          data-rarity="5"
+          data-quote="Every fortress melts once the core begins to glow."
+          data-image="https://images.unsplash.com/photo-1519340333755-c1aa5571fd46?auto=format&fit=crop&w=880&q=80"
+          data-skill="Magma Vault"
+          data-burst="Inferno Mantle"
+        >
+          <h3>Kairo Embermace</h3>
+          <p>Ember | Frontline Breaker</p>
+        </article>
+
+        <article
+          class="roster-card"
+          tabindex="0"
+          data-element="tide"
+          data-name="Mira Tideshade"
+          data-role="Field Healer"
+          data-rarity="4"
+          data-quote="A calm current can still sweep away an army."
+          data-image="https://images.unsplash.com/photo-1542204625-de293a7b18d3?auto=format&fit=crop&w=880&q=80"
+          data-skill="Abyssal Pulse"
+          data-burst="Moonwake Anthem"
+        >
+          <h3>Mira Tideshade</h3>
+          <p>Tide | Field Healer</p>
+        </article>
+
+        <article
+          class="roster-card"
+          tabindex="0"
+          data-element="terra"
+          data-name="Rook Granite"
+          data-role="Geo Defender"
+          data-rarity="4"
+          data-quote="Stand behind me. The mountain does not move."
+          data-image="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=880&q=80"
+          data-skill="Citadel Lift"
+          data-burst="Obsidian Bulwark"
+        >
+          <h3>Rook Granite</h3>
+          <p>Terra | Geo Defender</p>
+        </article>
+
+        <article
+          class="roster-card"
+          tabindex="0"
+          data-element="volt"
+          data-name="Vexa Pulse"
+          data-role="Quickswap DPS"
+          data-rarity="4"
+          data-quote="Blink once and the duel is over."
+          data-image="https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?auto=format&fit=crop&w=880&q=80"
+          data-skill="Static Arc"
+          data-burst="Ion Barrage"
+        >
+          <h3>Vexa Pulse</h3>
+          <p>Volt | Quickswap DPS</p>
+        </article>
+
+        <article
+          class="roster-card"
+          tabindex="0"
+          data-element="aero"
+          data-name="Sorin Gale"
+          data-role="Crowd Controller"
+          data-rarity="4"
+          data-quote="Your formation is already my formation."
+          data-image="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=880&q=80"
+          data-skill="Cyclone Knot"
+          data-burst="Pressure Break"
+        >
+          <h3>Sorin Gale</h3>
+          <p>Aero | Crowd Controller</p>
+        </article>
+
+        <article
+          class="roster-card"
+          tabindex="0"
+          data-element="ember"
+          data-name="Nora Cinderfield"
+          data-role="Off-field Burn"
+          data-rarity="4"
+          data-quote="Keep your blade up, I will handle the rest."
+          data-image="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=880&q=80"
+          data-skill="Cinder Trap"
+          data-burst="Phoenix Spiral"
+        >
+          <h3>Nora Cinderfield</h3>
+          <p>Ember | Off-field Burn</p>
+        </article>
+
+        <article
+          class="roster-card"
+          tabindex="0"
+          data-element="tide"
+          data-name="Eon Mariner"
+          data-role="Burst Sub-DPS"
+          data-rarity="5"
+          data-quote="Currents remember every battle ever fought."
+          data-image="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=880&q=80"
+          data-skill="Depth Mark"
+          data-burst="Tidal Archive"
+        >
+          <h3>Eon Mariner</h3>
+          <p>Tide | Burst Sub-DPS</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel wish-panel" data-reveal>
+      <div class="section-head">
+        <h2>Wish Simulator</h2>
+        <small>Practice pull strategy and pity pacing.</small>
+      </div>
+
+      <div class="wish-controls">
+        <button type="button" class="btn btn-primary" data-pull="1">Single Pull</button>
+        <button type="button" class="btn btn-ghost" data-pull="10">Ten Pulls</button>
+        <p class="pity-text">Current pity: <strong data-pity-count>0</strong>/80</p>
+      </div>
+
+      <ul class="wish-results" data-wish-results>
+        <li class="wish-empty">No pulls yet. Try your luck.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Optimize elemental synergy and plan your next rate-up target.</p>
+    <p>Copyright <span data-year></span> Gamora Interactive</p>
+  </footer>
 </body>
-
 </html>
